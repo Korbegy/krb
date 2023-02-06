@@ -896,7 +896,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
  
    
    async function getChampionsfixture() {
-     const response = await fetch(`${API_URLchampions`);
+     const response = await fetch(`${API_URLchampions}`);
      const data = await response.json();
      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
      const today = new Date();
@@ -979,7 +979,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
  
    
    async function getEuropafixture() {
-     const response = await fetch(`${API_URLeuropa);
+     const response = await fetch(`${API_URLeuropa});
      const data = await response.json();
      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
      const today = new Date();
