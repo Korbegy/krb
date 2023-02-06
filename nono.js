@@ -804,3 +804,250 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
 	getFAfixture()
    // END OF FA CUP FIXTURE 
    
+
+  // FIFA CLUB WORLD CUP
+
+
+   
+   const API_URLcwc = `https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.cwc/scoreboard?dates=${formattedDate}`;
+ 
+   
+   async function getCWCfixture() {
+     const response = await fetch(`${API_URLcwc}`);
+     const data = await response.json();
+     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+     const today = new Date();
+     const currentDayOfWeek = today.getDay();
+   
+     const events = data.events;
+     let matchesFound = false;
+     for (const event of events) {
+       if (event.status.type.completed !== true) {
+           const homeTeam = event.competitions[0].competitors[0];
+           const awayTeam = event.competitions[0].competitors[1];
+           const details = event.status.type.detail
+           const eventDate = new Date(event.date);
+           const eventDayOfWeek = eventDate.getDay();
+           const startTime = new Date(event.date);
+           const currentTime = new Date();
+           console.log(events);
+     const cwc_URL = `http://wcupstreaming.iceiy.com/cwc.html#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`
+   if (eventDayOfWeek === currentDayOfWeek || 
+             (event.status.type.state == "in" && eventDayOfWeek === currentDayOfWeek - 1)) {
+           const container = document.querySelector('#cwcfixtures');
+       const teamContainer = document.createElement('div');
+          
+           teamContainer.innerHTML = `
+       <center>
+                 <table class="demo">
+                     <tbody>
+                 
+                    <!-- champ-->
+        
+              <tr onclick="window.open('${cwc_URL}', '_blank')">
+              <div id='matchstate' onclick="location.href = '${cwc_URL}'">
+              <span> ${details}</span>
+          </div>
+   
+             <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
+               <td width='32.5%'>${homeTeam.team.shortDisplayName}</td>
+               <td id='vs' width='5%'>VS</td>
+               <td width='32.5%'>${awayTeam.team.shortDisplayName}</td>
+               <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+           </tr>
+             
+        </tbody>
+                     
+                 </table></center>
+       `;
+       container.appendChild(teamContainer);
+      
+   }
+   matchesFound = true;
+    }
+   }
+    //   IF NO MATCHES TODAY SHOW THIS CODE 
+    if (!matchesFound) {
+     const container = document.querySelector('#cwcfixtures');
+     const noMatchesSpan = document.createElement('div');
+     noMatchesSpan.innerHTML = `<center>
+       
+       <h4 id="nomatches" >NO MATCHES TODAY or FT</h4>
+       Join Telegram Channel <a class="telegram-button" href="javascript:void(window.open('https://t.me/wcupcf'))">
+       <i></i>
+       <span>WCUP.CF</span>
+   </a>
+       </center>`;
+     container.appendChild(noMatchesSpan);
+   }
+   }
+	getCWCfixture()
+   // END OF FIFA CLUB WORLD CUP 
+
+
+
+
+
+  // CHAMPIONS LEAGUE 
+
+
+   
+   const API_URLchampions = `https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard?dates=${formattedDate}`;
+ 
+   
+   async function getChampionsfixture() {
+     const response = await fetch(`${API_URLchampions`);
+     const data = await response.json();
+     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+     const today = new Date();
+     const currentDayOfWeek = today.getDay();
+   
+     const events = data.events;
+     let matchesFound = false;
+     for (const event of events) {
+       if (event.status.type.completed !== true) {
+           const homeTeam = event.competitions[0].competitors[0];
+           const awayTeam = event.competitions[0].competitors[1];
+           const details = event.status.type.detail
+           const eventDate = new Date(event.date);
+           const eventDayOfWeek = eventDate.getDay();
+           const startTime = new Date(event.date);
+           const currentTime = new Date();
+           console.log(events);
+     const champions_URL = `https://championsleague.f20.us/#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`
+   if (eventDayOfWeek === currentDayOfWeek || 
+             (event.status.type.state == "in" && eventDayOfWeek === currentDayOfWeek - 1)) {
+           const container = document.querySelector('#championsfixtures');
+       const teamContainer = document.createElement('div');
+          
+           teamContainer.innerHTML = `
+       <center>
+                 <table class="demo">
+                     <tbody>
+                 
+                    <!-- champ-->
+        
+              <tr onclick="window.open('${champions_URL}', '_blank')">
+              <div id='matchstate' onclick="location.href = '${champions_URL}'">
+              <span> ${details}</span>
+          </div>
+   
+             <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
+               <td width='32.5%'>${homeTeam.team.shortDisplayName}</td>
+               <td id='vs' width='5%'>VS</td>
+               <td width='32.5%'>${awayTeam.team.shortDisplayName}</td>
+               <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+           </tr>
+             
+        </tbody>
+                     
+                 </table></center>
+       `;
+       container.appendChild(teamContainer);
+      
+   }
+   matchesFound = true;
+    }
+   }
+    //   IF NO MATCHES TODAY SHOW THIS CODE 
+    if (!matchesFound) {
+     const container = document.querySelector('#championsfixtures');
+     const noMatchesSpan = document.createElement('div');
+     noMatchesSpan.innerHTML = `<center>
+       
+       <h4 id="nomatches" >NO MATCHES TODAY or FT</h4>
+       Join Telegram Channel <a class="telegram-button" href="javascript:void(window.open('https://t.me/wcupcf'))">
+       <i></i>
+       <span>WCUP.CF</span>
+   </a>
+       </center>`;
+     container.appendChild(noMatchesSpan);
+   }
+   }
+	getChampionsfixture()
+   // END OF CHAMPIONS LEAGUE
+
+
+
+
+
+  // CHAMPIONS LEAGUE 
+
+
+   
+   const API_URLeuropa = `https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.europa/scoreboard?dates=${formattedDate}`;
+ 
+   
+   async function getEuropafixture() {
+     const response = await fetch(`${API_URLeuropa);
+     const data = await response.json();
+     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+     const today = new Date();
+     const currentDayOfWeek = today.getDay();
+   
+     const events = data.events;
+     let matchesFound = false;
+     for (const event of events) {
+       if (event.status.type.completed !== true) {
+           const homeTeam = event.competitions[0].competitors[0];
+           const awayTeam = event.competitions[0].competitors[1];
+           const details = event.status.type.detail
+           const eventDate = new Date(event.date);
+           const eventDayOfWeek = eventDate.getDay();
+           const startTime = new Date(event.date);
+           const currentTime = new Date();
+           console.log(events);
+     const europa_URL = `https://europaleague.f20.us/#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`
+   if (eventDayOfWeek === currentDayOfWeek || 
+             (event.status.type.state == "in" && eventDayOfWeek === currentDayOfWeek - 1)) {
+           const container = document.querySelector('#europafixtures');
+       const teamContainer = document.createElement('div');
+          
+           teamContainer.innerHTML = `
+       <center>
+                 <table class="demo">
+                     <tbody>
+                 
+                    <!-- champ-->
+        
+              <tr onclick="window.open('${europa_URL}', '_blank')">
+              <div id='matchstate' onclick="location.href = '${europa_URL}'">
+              <span> ${details}</span>
+          </div>
+   
+             <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
+               <td width='32.5%'>${homeTeam.team.shortDisplayName}</td>
+               <td id='vs' width='5%'>VS</td>
+               <td width='32.5%'>${awayTeam.team.shortDisplayName}</td>
+               <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+           </tr>
+             
+        </tbody>
+                     
+                 </table></center>
+       `;
+       container.appendChild(teamContainer);
+      
+   }
+   matchesFound = true;
+    }
+   }
+    //   IF NO MATCHES TODAY SHOW THIS CODE 
+    if (!matchesFound) {
+     const container = document.querySelector('#europafixtures');
+     const noMatchesSpan = document.createElement('div');
+     noMatchesSpan.innerHTML = `<center>
+       
+       <h4 id="nomatches" >NO MATCHES TODAY or FT</h4>
+       Join Telegram Channel <a class="telegram-button" href="javascript:void(window.open('https://t.me/wcupcf'))">
+       <i></i>
+       <span>WCUP.CF</span>
+   </a>
+       </center>`;
+     container.appendChild(noMatchesSpan);
+   }
+   }
+	getEuropafixture()
+   // END OF europa LEAGUE
+
+
