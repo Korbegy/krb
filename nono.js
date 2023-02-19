@@ -267,7 +267,7 @@ let formattedDate = year + month + day;
            console.log(events);
 		 
 		 
-const es_URL = `https://laliga.f20.us/#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`; 
+const es_URL = `https://hesgoal.f20.us/#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`; 
    
    
    if (event.status.type.state === "in" || ((event.status.type.description === "Scheduled") && (eventDayOfWeek === currentDayOfWeek))) {
