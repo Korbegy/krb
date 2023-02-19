@@ -1051,9 +1051,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
    // END OF europa LEAGUE
 
 const API_URLxfl = "https://site.api.espn.com/apis/site/v2/sports/football/xfl/scoreboard";
-
 async function getxflfixture() {
-  loadingGif.style.display = 'block';
   const response = await fetch(`${API_URLxfl}`);
   const data = await response.json();
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -1072,7 +1070,7 @@ async function getxflfixture() {
     const eventDayOfWeek = eventDate.getDay();
     const startTime = new Date(event.date);
     const currentTime = new Date();
-	const details = event.status.type.detail
+	const details = event.status.type.detail;
 console.log(events);
     const xfl_URL = `https://nfl.f20.us/#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`
 	
@@ -1120,7 +1118,6 @@ console.log(events);
     container.appendChild(noMatchesSpan);
   }
 
-  loadingGif.style.display = 'none';
 }
 
 getxflfixture();
