@@ -27,8 +27,9 @@ let formattedDate = year + month + day;
        if (event.status.type.completed !== true) {
            const homeTeam = event.competitions[0].competitors[0];
            const awayTeam = event.competitions[0].competitors[1];
-           const details = event.status.type.detail
-           const eventDate = new Date(event.date);
+           const detail = event.status.type.detail
+		   const estTimeStr = detail.slice(detail.indexOf('at ') + 3, detail.indexOf(' EST'));   
+		   const eventDate = new Date(event.date);
            const eventDayOfWeek = eventDate.getDay();
            const startTime = new Date(event.date);
            const currentTime = new Date();
@@ -48,14 +49,15 @@ let formattedDate = year + month + day;
         
               <tr onclick="window.open('${PL_URL}', '_blank')">
               <div id='matchstate' onclick="location.href = '${PL_URL}'">
-              <span> ${details}</span>
+              
           </div>
    
              <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
-               <td width='32.5%'>${homeTeam.team.shortDisplayName}</td>
+               <td width='32%'>${homeTeam.team.shortDisplayName}</td>
                <td id='vs' width='5%'>VS</td>
-               <td width='32.5%'>${awayTeam.team.shortDisplayName}</td>
+               <td width='32%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+			   <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
            </tr>
              
         </tbody>
@@ -126,9 +128,10 @@ let formattedDate = year + month + day;
    
              <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
                <td width='32.5%'>${homeTeam.team.shortDisplayName}</td>
-               <td id='vs' width='5%'>VS</td>
+               <td id='vs' width='5%'  >VS</td>
                <td width='32.5%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+			    <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
            </tr>
              
         </tbody>
@@ -203,9 +206,10 @@ let formattedDate = year + month + day;
    
     <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
                <td width='32.5%'>${homeTeam.team.shortDisplayName}</td>
-               <td id='vs' width='5%'>VS</td>
+               <td id='vs' width='5%'  >VS</td>
                <td width='32.5%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+			    <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
            </tr>
              
         </tbody>
@@ -259,7 +263,8 @@ let formattedDate = year + month + day;
        if (event.status.type.completed !== true) {
            const homeTeam = event.competitions[0].competitors[0];
            const awayTeam = event.competitions[0].competitors[1];
-           const details = event.status.type.detail
+           const detail = event.status.type.detail
+		   const estTimeStr = detail.slice(detail.indexOf('at ') + 3, detail.indexOf(' EST'));
            const eventDate = new Date(event.date);
            const eventDayOfWeek = eventDate.getDay();
            const startTime = new Date(event.date);
@@ -284,7 +289,7 @@ const es_URL = `https://hesgoal.f20.us/#${homeTeam.team.shortDisplayName} vs ${a
               <tr onclick="window.open('${es_URL}', '_blank')">
              
 			 <div id='matchstate' onclick="location.href = '${es_URL}'">
-              <span>${details}</span>
+              
           </div>
    
              <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
@@ -292,6 +297,7 @@ const es_URL = `https://hesgoal.f20.us/#${homeTeam.team.shortDisplayName} vs ${a
                <td id='vs' width='5%'>VS</td>
                <td width='32.5%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+			    <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
            </tr>
              
         </tbody>
@@ -341,7 +347,8 @@ const es_URL = `https://hesgoal.f20.us/#${homeTeam.team.shortDisplayName} vs ${a
        if (event.status.type.completed !== true) {
            const homeTeam = event.competitions[0].competitors[0];
            const awayTeam = event.competitions[0].competitors[1];
-           const details = event.status.type.detail
+           const detail = event.status.type.detail
+		   const estTimeStr = detail.slice(detail.indexOf('at ') + 3, detail.indexOf(' EST'));
            const eventDate = new Date(event.date);
            const eventDayOfWeek = eventDate.getDay();
            const startTime = new Date(event.date);
@@ -366,7 +373,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
               <tr onclick="window.open('${delrey_URL}', '_blank')">
              
 			 <div id='matchstate' onclick="location.href = '${delrey_URL}'">
-              <span>${details}</span>
+              
           </div>
    
              <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
@@ -374,6 +381,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
                <td id='vs' width='5%'>VS</td>
                <td width='32.5%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+			    <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
            </tr>
              
         </tbody>
@@ -424,7 +432,8 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
        if (event.status.type.completed !== true) {
            const homeTeam = event.competitions[0].competitors[0];
            const awayTeam = event.competitions[0].competitors[1];
-           const details = event.status.type.detail
+           const detail = event.status.type.detail
+		   const estTimeStr = detail.slice(detail.indexOf('at ') + 3, detail.indexOf(' EST'));
            const eventDate = new Date(event.date);
            const eventDayOfWeek = eventDate.getDay();
            const startTime = new Date(event.date);
@@ -445,7 +454,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
         
               <tr onclick="window.open('${de_URL}', '_blank')">
               <div id='matchstate' onclick="location.href = '${de_URL}'">
-              <span> ${details}</span>
+              
           </div>
    
              <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
@@ -453,6 +462,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
                <td id='vs' width='5%'>VS</td>
                <td width='32.5%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+			    <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
            </tr>
              
         </tbody>
@@ -503,7 +513,8 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
        if (event.status.type.completed !== true) {
            const homeTeam = event.competitions[0].competitors[0];
            const awayTeam = event.competitions[0].competitors[1];
-           const details = event.status.type.detail
+           const detail = event.status.type.detail
+		   const estTimeStr = detail.slice(detail.indexOf('at ') + 3, detail.indexOf(' EST'));
            const eventDate = new Date(event.date);
            const eventDayOfWeek = eventDate.getDay();
            const startTime = new Date(event.date);
@@ -524,13 +535,14 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
         
               <tr onclick="window.open('${ksa_URL}', '_blank')">
               <div id='matchstate' onclick="location.href = '${ksa_URL}'">
-              <span> ${details}</span>
+              
           </div>
    
             
                <td width='47.5%'>${homeTeam.team.shortDisplayName}</td>
                <td id='vs' width='5%'>VS</td>
                <td width='47.5%'>${awayTeam.team.shortDisplayName}</td>
+			   <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
               
            </tr>
              
@@ -583,7 +595,8 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
        if (event.status.type.completed !== true) {
            const homeTeam = event.competitions[0].competitors[0];
            const awayTeam = event.competitions[0].competitors[1];
-           const details = event.status.type.detail
+           const detail = event.status.type.detail;
+		   const estTimeStr = detail.slice(detail.indexOf('at ') + 3, detail.indexOf(' EST'));
            const eventDate = new Date(event.date);
            const eventDayOfWeek = eventDate.getDay();
            const startTime = new Date(event.date);
@@ -604,7 +617,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
         
               <tr onclick="window.open('${car_URL}', '_blank')">
               <div id='matchstate' onclick="location.href = '${car_URL}'">
-              <span> ${details}</span>
+              
           </div>
    
              <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
@@ -612,6 +625,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
                <td id='vs' width='5%'>VS</td>
                <td width='32.5%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+			    <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
            </tr>
              
         </tbody>
@@ -664,7 +678,8 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
        if (event.status.type.completed !== true) {
            const homeTeam = event.competitions[0].competitors[0];
            const awayTeam = event.competitions[0].competitors[1];
-           const details = event.status.type.detail
+           const detail = event.status.type.detail;
+		   const estTimeStr = detail.slice(detail.indexOf('at ') + 3, detail.indexOf(' EST'));
            const eventDate = new Date(event.date);
            const eventDayOfWeek = eventDate.getDay();
            const startTime = new Date(event.date);
@@ -685,7 +700,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
         
               <tr onclick="window.open('${ita_URL}', '_blank')">
               <div id='matchstate' onclick="location.href = '${ita_URL}'">
-              <span> ${details}</span>
+              
           </div>
    
              <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
@@ -693,6 +708,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
                <td id='vs' width='5%'>VS</td>
                <td width='32.5%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+			    <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
            </tr>
              
         </tbody>
@@ -745,7 +761,8 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
        if (event.status.type.completed !== true) {
            const homeTeam = event.competitions[0].competitors[0];
            const awayTeam = event.competitions[0].competitors[1];
-           const details = event.status.type.detail
+           const detail = event.status.type.detail;
+		   const estTimeStr = detail.slice(detail.indexOf('at ') + 3, detail.indexOf(' EST'));
            const eventDate = new Date(event.date);
            const eventDayOfWeek = eventDate.getDay();
            const startTime = new Date(event.date);
@@ -766,7 +783,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
         
               <tr onclick="window.open('${fa_URL}', '_blank')">
               <div id='matchstate' onclick="location.href = '${fa_URL}'">
-              <span> ${details}</span>
+              
           </div>
    
              <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
@@ -774,6 +791,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
                <td id='vs' width='5%'>VS</td>
                <td width='32.5%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+			    <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
            </tr>
              
         </tbody>
@@ -825,7 +843,8 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
        if (event.status.type.completed !== true) {
            const homeTeam = event.competitions[0].competitors[0];
            const awayTeam = event.competitions[0].competitors[1];
-           const details = event.status.type.detail
+           const detail = event.status.type.detail;
+		   const estTimeStr = detail.slice(detail.indexOf('at ') + 3, detail.indexOf(' EST'));
            const eventDate = new Date(event.date);
            const eventDayOfWeek = eventDate.getDay();
            const startTime = new Date(event.date);
@@ -846,7 +865,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
         
               <tr onclick="window.open('${cwc_URL}', '_blank')">
               <div id='matchstate' onclick="location.href = '${cwc_URL}'">
-              <span> ${details}</span>
+              
           </div>
    
              <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
@@ -854,6 +873,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
                <td id='vs' width='5%'>VS</td>
                <td width='32.5%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+			    <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
            </tr>
              
         </tbody>
@@ -908,7 +928,8 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
        if (event.status.type.completed !== true) {
            const homeTeam = event.competitions[0].competitors[0];
            const awayTeam = event.competitions[0].competitors[1];
-           const details = event.status.type.detail
+           const detail = event.status.type.detail;
+		   const estTimeStr = detail.slice(detail.indexOf('at ') + 3, detail.indexOf(' EST'));
            const eventDate = new Date(event.date);
            const eventDayOfWeek = eventDate.getDay();
            const startTime = new Date(event.date);
@@ -929,7 +950,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
         
               <tr onclick="window.open('${champions_URL}', '_blank')">
               <div id='matchstate' onclick="location.href = '${champions_URL}'">
-              <span> ${details}</span>
+              
           </div>
    
              <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
@@ -937,6 +958,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
                <td id='vs' width='5%'>VS</td>
                <td width='32.5%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+			    <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
            </tr>
              
         </tbody>
@@ -991,7 +1013,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
        if (event.status.type.completed !== true) {
            const homeTeam = event.competitions[0].competitors[0];
            const awayTeam = event.competitions[0].competitors[1];
-           const details = event.status.type.detail
+           const detail = event.status.type.detail
            const eventDate = new Date(event.date);
            const eventDayOfWeek = eventDate.getDay();
            const startTime = new Date(event.date);
@@ -1012,7 +1034,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
         
               <tr onclick="window.open('${europa_URL}', '_blank')">
               <div id='matchstate' onclick="location.href = '${europa_URL}'">
-              <span> ${details}</span>
+              
           </div>
    
              <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
@@ -1020,6 +1042,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
                <td id='vs' width='5%'>VS</td>
                <td width='32.5%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+			    <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
            </tr>
              
         </tbody>
@@ -1070,7 +1093,7 @@ async function getxflfixture() {
     const eventDayOfWeek = eventDate.getDay();
     const startTime = new Date(event.date);
     const currentTime = new Date();
-	const details = event.status.type.detail;
+	const detail = event.status.type.detail;
 console.log(events);
     const xfl_URL = `https://nfl.f20.us/#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`
 	
@@ -1086,14 +1109,15 @@ console.log(events);
                 <tr onclick="window.open('${xfl_URL}', '_blank')">
 				
                   <div id='matchstate' onclick="location.href = '${xfl_URL}'">
-                    <span> ${details}</span>
+                    
                   </div>
    
                   <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
                   <td width='32.5%'>${homeTeam.team.shortDisplayName}</td>
-                  <td id='vs' width='5%'>VS</td>
+                  <td id='vs' width='5%'  >VS</td>
                   <td width='32.5%'>${awayTeam.team.shortDisplayName}</td>
                   <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+				   <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
                 </tr>
               </tbody>
             </table>
@@ -1122,4 +1146,3 @@ console.log(events);
 
 getxflfixture();
 // end of xfl
-
