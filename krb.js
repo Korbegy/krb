@@ -1439,7 +1439,8 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
      
            const homeTeam = event.competitions[0].competitors[0];
            const awayTeam = event.competitions[0].competitors[1];
-           const detail = event.status.type.detail
+           const detail = event.status.type.detail;
+		const estTimeStr = detail.slice(detail.indexOf('at ') + 3, detail.indexOf(' EST'));
            const eventDate = new Date(event.date);
            const eventDayOfWeek = eventDate.getDay();
            const startTime = new Date(event.date);
