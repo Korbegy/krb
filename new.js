@@ -84,7 +84,7 @@ if (eventDate.toDateString() === today.toDateString() && event.status.type.state
     row.insertCell().innerHTML = time;
     row.insertCell().innerHTML = matchup;
     row.insertCell().innerHTML = score;
-    row.insertCell().innerHTML = `<a href='https://europaleague.f20.us#${homeT} vs ${awayT}'/><h5 id='livee'>HD</h5></a>`;
+    row.insertCell().innerHTML = `<a href='https://europaleague.f20.us#${homeT} vs ${awayT}'/><h5 id='livee'>LIVE</h5></a>`;
   }
   
   // اذا انتهت المباراة
@@ -216,7 +216,7 @@ if (eventDate.toDateString() === today.toDateString() && event.status.type.state
     row.insertCell().innerHTML = time;
     row.insertCell().innerHTML = matchup;
     row.insertCell().innerHTML = score;
-    row.insertCell().innerHTML = `<a href='https://europaleague.f20.us#${homeT} vs ${awayT}'/><h5 id='livee'>HD</h5></a>`;
+    row.insertCell().innerHTML = `<a href='https://europaleague.f20.us#${homeT} vs ${awayT}'/><h5 id='livee'>LIVE</h5></a>`;
   }
   
   // اذا انتهت المباراة
@@ -347,7 +347,7 @@ if (eventDate.toDateString() === today.toDateString() && event.status.type.state
     row.insertCell().innerHTML = time;
     row.insertCell().innerHTML = matchup;
     row.insertCell().innerHTML = score;
-    row.insertCell().innerHTML = `<a href='https://premierleague.f20.us#${homeT} vs ${awayT}'/><h5 id='livee'>HD</h5></a>`;
+    row.insertCell().innerHTML = `<a href='https://premierleague.f20.us#${homeT} vs ${awayT}'/><h5 id='livee'>LIVE</h5></a>`;
   }
   
   // اذا انتهت المباراة
@@ -480,7 +480,7 @@ if (eventDate.toDateString() === today.toDateString() && event.status.type.state
     row.insertCell().innerHTML = time;
     row.insertCell().innerHTML = matchup;
     row.insertCell().innerHTML = score;
-    row.insertCell().innerHTML = `<a href='https://hesgoal.f20.us#${homeT} vs ${awayT}'/><h5 id='livee'>HD</h5></a>`;
+    row.insertCell().innerHTML = `<a href='https://hesgoal.f20.us#${homeT} vs ${awayT}'/><h5 id='livee'>LIVE</h5></a>`;
   }
   
   // اذا انتهت المباراة
@@ -612,7 +612,7 @@ if (eventDate.toDateString() === today.toDateString() && event.status.type.state
     row.insertCell().innerHTML = time;
     row.insertCell().innerHTML = matchup;
     row.insertCell().innerHTML = score;
-    row.insertCell().innerHTML = `<a href='http://wcupstreaming.iceiy.com/leads/wcupcf/live/live.html'/><h5 id='livee'>HD</h5></a>`;
+    row.insertCell().innerHTML = `<a href='http://wcupstreaming.iceiy.com/leads/wcupcf/live/live.html'/><h5 id='livee'>LIVE</h5></a>`;
   }
   
   // اذا انتهت المباراة
@@ -744,7 +744,7 @@ if (eventDate.toDateString() === today.toDateString() && event.status.type.state
     row.insertCell().innerHTML = time;
     row.insertCell().innerHTML = matchup;
     row.insertCell().innerHTML = score;
-    row.insertCell().innerHTML = `<a href='https://bundesliga.f20.us#${homeT} vs ${awayT}'/><h5 id='livee'>HD</h5></a>`;
+    row.insertCell().innerHTML = `<a href='https://bundesliga.f20.us#${homeT} vs ${awayT}'/><h5 id='livee'>LIVE</h5></a>`;
   }
   
   // اذا انتهت المباراة
@@ -876,7 +876,7 @@ if (eventDate.toDateString() === today.toDateString() && event.status.type.state
     row.insertCell().innerHTML = time;
     row.insertCell().innerHTML = matchup;
     row.insertCell().innerHTML = score;
-    row.insertCell().innerHTML = `<a href='http://wcupstreaming.iceiy.com/super.html#${homeT} vs ${awayT}'/><h5 id='livee'>HD</h5></a>`;
+    row.insertCell().innerHTML = `<a href='http://wcupstreaming.iceiy.com/super.html#${homeT} vs ${awayT}'/><h5 id='livee'>LIVE</h5></a>`;
   }
   
   // اذا انتهت المباراة
@@ -1008,7 +1008,7 @@ if (eventDate.toDateString() === today.toDateString() && event.status.type.state
     row.insertCell().innerHTML = time;
     row.insertCell().innerHTML = matchup;
     row.insertCell().innerHTML = score;
-    row.insertCell().innerHTML = `<a href='https://all.f20.us#${homeT} vs ${awayT}'/><h5 id='livee'>HD</h5></a>`;
+    row.insertCell().innerHTML = `<a href='https://all.f20.us#${homeT} vs ${awayT}'/><h5 id='livee'>LIVE</h5></a>`;
   }
   
   // اذا انتهت المباراة
