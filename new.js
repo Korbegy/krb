@@ -80,7 +80,7 @@ if (eventDate.toDateString() === today.toDateString() && event.status.type.state
     var score2 = event.competitions[0].competitors[1].score;
     var score = score1 + " - " + score2;
     var status = event.status.type.shortDetail;
-    row.insertCell().innerHTML = date.toLocaleDateString();
+    
     row.insertCell().innerHTML = time;
     row.insertCell().innerHTML = matchup;
     row.insertCell().innerHTML = score;
@@ -212,7 +212,7 @@ if (eventDate.toDateString() === today.toDateString() && event.status.type.state
     var score2 = event.competitions[0].competitors[1].score;
     var score = score1 + " - " + score2;
     var status = event.status.type.shortDetail;
-    row.insertCell().innerHTML = date.toLocaleDateString();
+    
     row.insertCell().innerHTML = time;
     row.insertCell().innerHTML = matchup;
     row.insertCell().innerHTML = score;
@@ -343,7 +343,7 @@ if (eventDate.toDateString() === today.toDateString() && event.status.type.state
     var score2 = event.competitions[0].competitors[1].score;
     var score = score1 + " - " + score2;
     var status = event.status.type.shortDetail;
-    row.insertCell().innerHTML = date.toLocaleDateString();
+    
     row.insertCell().innerHTML = time;
     row.insertCell().innerHTML = matchup;
     row.insertCell().innerHTML = score;
@@ -476,7 +476,7 @@ if (eventDate.toDateString() === today.toDateString() && event.status.type.state
     var score2 = event.competitions[0].competitors[1].score;
     var score = score1 + " - " + score2;
     var status = event.status.type.shortDetail;
-    row.insertCell().innerHTML = date.toLocaleDateString();
+    
     row.insertCell().innerHTML = time;
     row.insertCell().innerHTML = matchup;
     row.insertCell().innerHTML = score;
@@ -608,7 +608,7 @@ if (eventDate.toDateString() === today.toDateString() && event.status.type.state
     var score2 = event.competitions[0].competitors[1].score;
     var score = score1 + " - " + score2;
     var status = event.status.type.shortDetail;
-    row.insertCell().innerHTML = date.toLocaleDateString();
+    
     row.insertCell().innerHTML = time;
     row.insertCell().innerHTML = matchup;
     row.insertCell().innerHTML = score;
@@ -740,7 +740,7 @@ if (eventDate.toDateString() === today.toDateString() && event.status.type.state
     var score2 = event.competitions[0].competitors[1].score;
     var score = score1 + " - " + score2;
     var status = event.status.type.shortDetail;
-    row.insertCell().innerHTML = date.toLocaleDateString();
+    
     row.insertCell().innerHTML = time;
     row.insertCell().innerHTML = matchup;
     row.insertCell().innerHTML = score;
@@ -872,7 +872,7 @@ if (eventDate.toDateString() === today.toDateString() && event.status.type.state
     var score2 = event.competitions[0].competitors[1].score;
     var score = score1 + " - " + score2;
     var status = event.status.type.shortDetail;
-    row.insertCell().innerHTML = date.toLocaleDateString();
+    
     row.insertCell().innerHTML = time;
     row.insertCell().innerHTML = matchup;
     row.insertCell().innerHTML = score;
@@ -1004,7 +1004,6 @@ if (eventDate.toDateString() === today.toDateString() && event.status.type.state
     var score2 = event.competitions[0].competitors[1].score;
     var score = score1 + " - " + score2;
     var status = event.status.type.shortDetail;
-    row.insertCell().innerHTML = date.toLocaleDateString();
     row.insertCell().innerHTML = time;
     row.insertCell().innerHTML = matchup;
     row.insertCell().innerHTML = score;
