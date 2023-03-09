@@ -1398,19 +1398,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
 
    }
     //   IF NO MATCHES TODAY SHOW THIS CODE 
-    if (!matchesFound) {
-     const container = document.querySelector('#championsfixtures');
-     const noMatchesSpan = document.createElement('div');
-     noMatchesSpan.innerHTML = `<center>
-       
-       <h4 id="nomatches" >NO MATCHES TODAY or FT</h4>
-       Join Telegram Channel <a class="telegram-button" href="javascript:void(window.open('https://t.me/wcupcf'))">
-       <i></i>
-       <span>F20.US</span>
-   </a>
-       </center>`;
-     container.appendChild(noMatchesSpan);
-   }
+     if (!matchesFound) {document.getElementById("championsfixtures").style.display = "none";}
    }
 	getChampionsfixture()
    // END OF CHAMPIONS LEAGUE
@@ -1554,19 +1542,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
 
    }
     //   IF NO MATCHES TODAY SHOW THIS CODE 
-    if (!matchesFound) {
-     const container = document.querySelector('#europafixtures');
-     const noMatchesSpan = document.createElement('div');
-     noMatchesSpan.innerHTML = `<center>
-       
-       <h4 id="nomatches" >NO MATCHES TODAY or FT</h4>
-       Join Telegram Channel <a class="telegram-button" href="javascript:void(window.open('https://t.me/wcupcf'))">
-       <i></i>
-       <span>F20.US</span>
-   </a>
-       </center>`;
-     container.appendChild(noMatchesSpan);
-   }
+    if (!matchesFound) {document.getElementById("europafixtures").style.display = "none";}
    }
 	getEuropafixture()
    // END OF europa LEAGUE
@@ -1627,19 +1603,7 @@ console.log(events);
     }
   }
 
-  if (!matchesFound) {
-    const container = document.querySelector('#xflfixtures');
-    const noMatchesSpan = document.createElement('div');
-    noMatchesSpan.innerHTML = `<center>
-      <h4 id="nomatches">ALL MATCHES FT</h4>
-      Join Telegram Channel To Get Live Streams  <a class="telegram-button" href="javascript:void(window.open('https://t.me/wcupcf'))">
-      <i></i>
-      <span>F20.us</span>
-    </a>
-    </center>`;
-    container.appendChild(noMatchesSpan);
-  }
-
+   if (!matchesFound) {document.getElementById("xflfixtures").style.display = "none";}
 }
 
 getxflfixture();
