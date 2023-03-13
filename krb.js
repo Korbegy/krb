@@ -208,9 +208,10 @@ let formattedDate = year + month + day;
   
   // NBA
    
-   const API_URLNBA = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard';
    
-   
+//const API_URLNBA = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard';
+const API_URLNBA = `https://site.api.espn.com/apis/site/v2/sports/soccer/mex.1/scoreboard?dates=${formattedDate}`;
+
    async function getNBA() {
      const response = await fetch(`${API_URLNBA}`);
      const data = await response.json();
