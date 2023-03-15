@@ -4,7 +4,7 @@ let month = String(today.getMonth() + 1).padStart(2, '0');
 let day = String(today.getDate()).padStart(2, '0');
 let formattedDate = year + month + day;
 
-fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/eufa.champions/scoreboard?dates=${formattedDate}`)
+fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard?dates=${formattedDate}`)
   .then(response => response.json())
   .then(data => {
     const schedule = data.events.filter(event => event.status.type.state !== "post"); // Filter out post events
