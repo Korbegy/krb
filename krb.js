@@ -62,7 +62,7 @@ let formattedDate = year + month + day;
        container.appendChild(teamContainer); 
 		 
 	 }
-    if ((event.status.type.state == "in" && eventDayOfWeek === currentDayOfWeek - 1)) {
+    if (event.status.type.state === "in" || (event.status.type.description === "Halftime")) {
            const container = document.querySelector('#plfixtures');
        const teamContainer = document.createElement('div');
           
