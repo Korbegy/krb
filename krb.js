@@ -8,7 +8,7 @@ let formattedDate = year + month + day;
 //  ?dates=${formattedDate}`
 
    // PL LEAGUE
-   const API_URLPL = `https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=${formattedDate}`;
+   const API_URLPL = `https://site.api.espn.com/apis/site/v2/sports/soccer/col.copa/scoreboard?dates=${formattedDate}`;
  
    
    async function getPLfixture() {
@@ -62,7 +62,7 @@ let formattedDate = year + month + day;
        container.appendChild(teamContainer); 
 		 
 	 }
-    if (event.status.type.state === "in" || (event.status.type.description === "Halftime")) {
+    if ((event.status.type.state == "in" && eventDayOfWeek === currentDayOfWeek - 1)) {
            const container = document.querySelector('#plfixtures');
        const teamContainer = document.createElement('div');
           
@@ -83,7 +83,7 @@ let formattedDate = year + month + day;
                <td id='vs' width='5%'>VS</td>
                <td width='32%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
-			   <td id='timetd' width='1%'><span id='time' style='color:red;font-weight: 800;'><img src='https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif' style='height:15px;float:right;'/> LIVE</span></td>
+			   <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'><img src='https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif' style='height:15px;float:right;'/> LIVE</span></td>
            </tr>
              
         </tbody>
@@ -356,7 +356,7 @@ const es_URL = `https://hesgoal.f20.us/#${homeTeam.team.shortDisplayName} vs ${a
                <td id='vs' width='5%'>VS</td>
                <td width='32%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
-			   <td id='timetd' width='1%'><span id='time' style='color:red;font-weight: 800;'><img src='https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif' style='height:15px;float:right;'/> LIVE</span></td>
+			   <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
            </tr>
              
         </tbody>
@@ -498,7 +498,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
                <td id='vs' width='5%'>VS</td>
                <td width='32%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
-			   <td id='timetd' width='1%'><span id='time' style='color:red;font-weight: 800;'><img src='https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif' style='height:15px;float:right;'/> LIVE</span></td>
+			   <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
            </tr>
              
         </tbody>
@@ -638,7 +638,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
                <td id='vs' width='5%'>VS</td>
                <td width='32%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
-			   <td id='timetd' width='1%'><span id='time' style='color:red;font-weight: 800;'><img src='https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif' style='height:15px;float:right;'/> LIVE</span></td>
+			   <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
            </tr>
              
         </tbody>
@@ -776,7 +776,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
              <td width='47.5%'>${homeTeam.team.shortDisplayName}</td>
                <td id='vs' width='5%'>VS</td>
                <td width='47.5%'>${awayTeam.team.shortDisplayName}</td>
-			   			   <td id='timetd' width='1%'><span id='time' style='color:red;font-weight: 800;'><img src='https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif' style='height:15px;float:right;'/> LIVE</span></td>
+			   			   <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
            </tr>
              
         </tbody>
@@ -988,7 +988,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
                <td id='vs' width='5%'>VS</td>
                <td width='32%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
-			   <td id='timetd' width='1%'><span id='time' style='color:red;font-weight: 800;'><img src='https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif' style='height:15px;float:right;'/> LIVE</span></td>
+			   <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
            </tr>
              
         </tbody>
@@ -1130,7 +1130,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
                <td id='vs' width='5%'>VS</td>
                <td width='32%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
-			   <td id='timetd' width='1%'><span id='time' style='color:red;font-weight: 800;'><img src='https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif' style='height:15px;float:right;'/> LIVE</span></td>
+			   <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
            </tr>
              
         </tbody>
@@ -1344,7 +1344,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
                <td id='vs' width='5%'>VS</td>
                <td width='32%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
-			   <td id='timetd' width='1%'><span id='time' style='color:red;font-weight: 800;'><img src='https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif' style='height:15px;float:right;'/> LIVE</span></td>
+			   <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
            </tr>
              
         </tbody>
@@ -1488,7 +1488,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
                <td id='vs' width='5%'>VS</td>
                <td width='32%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
-			   <td id='timetd' width='1%'><span id='time' style='color:red;font-weight: 800;'><img src='https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif' style='height:15px;float:right;'/> LIVE</span></td>
+			   <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
            </tr>
              
         </tbody>
@@ -1688,7 +1688,7 @@ getxflfixture();
                <td id='vs' width='5%'>VS</td>
                <td width='32%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
-			   <td id='timetd' width='1%'><span id='time' style='color:red;font-weight: 800;'><img src='https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif' style='height:15px;float:right;'/> LIVE</span></td>
+			   <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
            </tr>
              
         </tbody>
