@@ -8,7 +8,7 @@ let formattedDate = year + month + day;
 //  ?dates=${formattedDate}`
 
    // PL LEAGUE
-   const API_URLPL = `https://site.api.espn.com/apis/site/v2/sports/soccer/col.copa/scoreboard?dates=${formattedDate}`;
+   const API_URLPL = `https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=${formattedDate}`;
  
    
    async function getPLfixture() {
