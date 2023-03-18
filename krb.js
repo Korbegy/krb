@@ -62,7 +62,7 @@ let formattedDate = year + month + day;
        container.appendChild(teamContainer); 
 		 
 	 }
-    if (event.status.type.state === "in" || (event.status.type.description === "Halftime")) {
+if (event.status.type.state === "in" || (event.status.type.description === "Halftime")) {
            const container = document.querySelector('#plfixtures');
        const teamContainer = document.createElement('div');
           
@@ -83,7 +83,7 @@ let formattedDate = year + month + day;
                <td id='vs' width='5%'>VS</td>
                <td width='32%'>${awayTeam.team.shortDisplayName}</td>
                <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
-			   <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'><img src='https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif' style='height:15px;float:right;'/> LIVE</span></td>
+			   <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
            </tr>
              
         </tbody>
@@ -744,7 +744,7 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
               
           </div>
    
-             <td width='47.5%'>${homeTeam.team.shortDisplayName}</td>
+				<td width='47.5%'>${homeTeam.team.shortDisplayName}</td>
                <td id='vs' width='5%'>VS</td>
                <td width='47.5%'>${awayTeam.team.shortDisplayName}</td>
 			   <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
@@ -805,11 +805,9 @@ const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.sh
               
           </div>
    
-             <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
-               <td width='32%'>${homeTeam.team.shortDisplayName}</td>
-               <td id='vs' width='5%'>FT</td>
-               <td width='32%'>${awayTeam.team.shortDisplayName}</td>
-               <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+            <td width='47.5%'>${homeTeam.team.shortDisplayName}</td>
+               <td id='vs' width='5%'>VS</td>
+               <td width='47.5%'>${awayTeam.team.shortDisplayName}</td>
 			   <td id='timetd' width='1%'><span id='time'>
 			   
 			  <img src='${homeTeam.team.logo}' style='height:15px;'/> ${hometeamscore} : ${awayteamscore} <img src='${awayTeam.team.logo}' style='height:15px;'/>
