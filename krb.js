@@ -21,6 +21,7 @@ let formattedDate = year + month + day;
      const events = data.events;
      let matchesFound = false;
      for (const event of events) {
+	     if (event.status.type.description !== "Postponed"){
 		   const homeTeam = event.competitions[0].competitors[0];
            const awayTeam = event.competitions[0].competitors[1];
            const detail = event.status.type.detail;
@@ -133,7 +134,7 @@ if (event.status.type.state === "in" || (event.status.type.description === "Half
 	
    matchesFound = true;
     
-
+}
    }
     //   IF NO MATCHES TODAY SHOW THIS CODE 
     if (!matchesFound) {document.getElementById("plfixtures").style.display = "none";}
