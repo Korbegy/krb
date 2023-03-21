@@ -1744,3 +1744,140 @@ getxflfixture();
    }
    getmxfixture()
    // END OF LIGA MX
+
+   // Euro 2024
+   const API_URLeuro = `https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.euroq/scoreboard?dates=${formattedDate}`;
+ 
+   
+   async function getEUROfixture() {
+     const response = await fetch(`${API_URLeuro}`);
+     const data = await response.json();
+     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+     const today = new Date();
+     const currentDayOfWeek = today.getDay();
+   
+     const events = data.events;
+     let matchesFound = false;
+     for (const event of events) {
+	     if (event.status.type.description !== "Postponed"){
+		   const homeTeam = event.competitions[0].competitors[0];
+           const awayTeam = event.competitions[0].competitors[1];
+           const detail = event.status.type.detail;
+		   const eventDate = new Date(event.date);
+		   const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });   
+		   const eventDayOfWeek = eventDate.getDay();
+           const startTime = new Date(event.date);
+           const currentTime = new Date();
+           console.log(events);
+     const euro_URL = `https://euro.f20.us/#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`;
+	 if (event.status.type.state === "pre"){
+		const container = document.querySelector('#eurofixtures');
+       const teamContainer = document.createElement('div');
+          
+           teamContainer.innerHTML = `
+       <center>
+                 <table class="demo">
+                     <tbody>
+                 
+                    <!-- champ-->
+        
+              <tr onclick="window.open('${euro_URL}', '_blank')">
+              <div id='matchstate' onclick="location.href = '${euro_URL}'">
+              
+          </div>
+   
+             <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
+               <td width='32%'>${homeTeam.team.shortDisplayName}</td>
+               <td id='vs' width='5%'>VS</td>
+               <td width='32%'>${awayTeam.team.shortDisplayName}</td>
+               <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+			   <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
+           </tr>
+             
+        </tbody>
+                     
+                 </table></center>
+       `;
+       container.appendChild(teamContainer); 
+		 
+	 }
+if (event.status.type.state === "in" || (event.status.type.description === "Halftime")) {
+           const container = document.querySelector('#eurofixtures');
+       const teamContainer = document.createElement('div');
+          
+           teamContainer.innerHTML = `
+       <center>
+                 <table class="demo">
+                     <tbody>
+                 
+                    <!-- champ-->
+        
+              <tr onclick="window.open('${euro_URL}', '_blank')">
+              <div id='matchstate' onclick="location.href = '${euro_URL}'">
+              
+          </div>
+   
+             <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
+               <td width='32%'>${homeTeam.team.shortDisplayName}</td>
+               <td id='vs' width='5%'>VS</td>
+               <td width='32%'>${awayTeam.team.shortDisplayName}</td>
+               <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+			   <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
+           </tr>
+             
+        </tbody>
+                     
+                 </table></center>
+       `;
+       container.appendChild(teamContainer);
+      
+   }
+   // لو الماتش خلص // 
+    if (event.status.type.state === "post") {
+		const hometeamscore = event.competitions[0].competitors[0].score;
+		const awayteamscore = event.competitions[0].competitors[1].score;
+	   const container = document.querySelector('#eurofixtures');
+       const teamContainer = document.createElement('div');
+          
+           teamContainer.innerHTML = `
+       <center>
+                 <table class="demo">
+                     <tbody>
+                 
+                    <!-- champ-->
+        
+              <tr>
+               <div id='matchstate'></div>
+   
+             <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
+               <td width='32%'>${homeTeam.team.shortDisplayName}</td>
+               <td id='vs' width='5%'>FT</td>
+               <td width='32%'>${awayTeam.team.shortDisplayName}</td>
+               <td><img alt='${awayTeam.team.displayName} logo' src='${awayTeam.team.logo}' id='team2' width='15%'/></td>
+			   <td id='timetd' width='1%'><span id='time'>
+			   
+			  <img src='${homeTeam.team.logo}' style='height:15px;'/> ${hometeamscore} : ${awayteamscore} <img src='${awayTeam.team.logo}' style='height:15px;'/>
+			   
+			   </span></td>
+           </tr>
+             
+        </tbody>
+                     
+                 </table></center>
+       `;
+       container.appendChild(teamContainer);
+      
+		
+	}
+	
+   matchesFound = true;
+    
+}
+   }
+    //   IF NO MATCHES TODAY SHOW THIS CODE 
+    if (!matchesFound) {document.getElementById("eurofixtures").style.display = "none";}
+   }
+   getEUROfixture()
+   // END OF ENGLISH PREMIER LEAGUE API CODE 
+   
+   
