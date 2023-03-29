@@ -245,7 +245,7 @@ const API_URLNBA = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba
                     <!-- champ-->
         
               <tr onclick="window.open('${NBA_URL}', '_blank')">
-               <div id='matchstate' onclick="location.href = '${NBA_URL}'"><div id='matchstate2'></div> <p><strong>${timeOfMatch}</strong></p></div>
+               <div id='matchstate'></div>
    
     <td><img alt='${homeTeam.team.displayName} logo' src='${homeTeam.team.logo}' id='team1' width='15%' /></td>
                <td width='32.5%'>${homeTeam.team.shortDisplayName}</td>
