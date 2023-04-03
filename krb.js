@@ -429,14 +429,17 @@ const es_URL = `https://hesgoal.f20.us/#${homeTeam.team.shortDisplayName} vs ${a
      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
      const today = new Date();
      const currentDayOfWeek = today.getDay();
-   
-     const events = data.events;
+	 const league = data.leagues;
+	 const Slug = league[0].slug;
+	 const events = data.events;
+     
      let matchesFound = false;
      for (const event of events) {
        
            const homeTeam = event.competitions[0].competitors[0];
            const awayTeam = event.competitions[0].competitors[1];
-           const detail = event.status.type.detail
+           const detail = event.status.type.detail;
+		   const eventId = event.id;
 		   const eventDate = new Date(event.date);
 		   const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
            const eventDayOfWeek = eventDate.getDay();
@@ -445,7 +448,7 @@ const es_URL = `https://hesgoal.f20.us/#${homeTeam.team.shortDisplayName} vs ${a
            console.log(events);
 		 
 		 
-const delrey_URL = `http://wcupstreaming.iceiy.com/super.html#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`; 
+const delrey_URL = `https://live.f20.us/#${Slug}/${eventId}`; 
    
    if (event.status.type.state === "pre"){
 		const container = document.querySelector('#delreyfixtures');
