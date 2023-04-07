@@ -923,21 +923,23 @@ const delrey_URL = `https://live.f20.us/#${Slug}/${eventId}`;
      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
      const today = new Date();
      const currentDayOfWeek = today.getDay();
-   
-     const events = data.events;
+	 const league = data.leagues;
+	 const Slug = league[0].slug;
+	 const events = data.events;
      let matchesFound = false;
      for (const event of events) {
       
            const homeTeam = event.competitions[0].competitors[0];
            const awayTeam = event.competitions[0].competitors[1];
            const detail = event.status.type.detail;
+		   const eventId = event.id;
 		   const eventDate = new Date(event.date);
 		   const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
            const eventDayOfWeek = eventDate.getDay();
            const startTime = new Date(event.date);
            const currentTime = new Date();
            console.log(events);
-     const ita_URL = "http://wcupstreaming.iceiy.com/leads/wcupcf/live/live.html"
+     const ita_URL = `https://live.f20.us/#${Slug}/${eventId}`
  if (event.status.type.state === "pre"){
 		const container = document.querySelector('#itafixtures');
        const teamContainer = document.createElement('div');
