@@ -1769,20 +1769,22 @@ getxflfixture();
      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
      const today = new Date();
      const currentDayOfWeek = today.getDay();
-   
+	 const league = data.leagues;
+	 const Slug = league[0].slug;
      const events = data.events;
      let matchesFound = false;
      for (const event of events) {
 		   const homeTeam = event.competitions[0].competitors[0];
            const awayTeam = event.competitions[0].competitors[1];
-           const detail = event.status.type.detail
+           const detail = event.status.type.detail;
+		   const eventId = event.id;
 		   const eventDate = new Date(event.date);
 		   const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
            const eventDayOfWeek = eventDate.getDay();
            const startTime = new Date(event.date);
            const currentTime = new Date();
            console.log(events);
-     const mx_URL = `https://ligamx.f20.us/#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`;
+     const mx_URL = `https://live.f20.us/#${Slug}/${eventId}`;
 	 if (event.status.type.state === "pre"){
 		const container = document.querySelector('#mxfixtures');
        const teamContainer = document.createElement('div');
