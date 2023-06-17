@@ -1780,7 +1780,8 @@ getmmafixture()
 
 
 
-  //  F1
+
+   //  F1
   const API_URLF1 = `https://site.api.espn.com/apis/site/v2/sports/racing/f1/scoreboard`;
 
 
@@ -1792,12 +1793,13 @@ getmmafixture()
     let matchesFound = false;
 
     for (const event of events) {
-      if (event.status.type.description !== "Postponed") {
+     
         const nameofevent = event.shortName;
       const circuitfullname = event.circuit.fullName;
         const competitions = event.competitions;
 
         for (const competition of competitions) {
+          if (competition.status.type.state !== "post") {
                     const eventDate = new Date(competition.date);
           const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
           const eventDayOfWeek = eventDate.getDay();
@@ -1919,8 +1921,11 @@ getmmafixture()
             container.appendChild(teamContainer);
             matchesFound = true;
           }
+
+
+           } 
         }
-      }
+    
     }
 
     if (!matchesFound) {
@@ -1929,5 +1934,6 @@ getmmafixture()
   }
 
   getf1fixture();
+
 
 
