@@ -1778,177 +1778,156 @@ getmmafixture()
 
 // -- end mma fixtuers -- //
 
- //  F1
-          const API_URLF1 = `https://site.api.espn.com/apis/site/v2/sports/racing/f1/scoreboard?dates=${formattedDate}`;
- 
-   
-        async function getf1fixture() {
-  const response = await fetch(`${API_URLF1}`);
-  const data = await response.json();
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const today = new Date();
-  const currentDayOfWeek = today.getDay();
-  const events = data.events;
-  console.log(events);
-  let matchesFound = false;
-  for (const event of events) {
-    if (event.status.type.description !== "Postponed") {
-      const nameofevent = event.shortName;
+
+
+  //  F1
+  const API_URLF1 = `https://site.api.espn.com/apis/site/v2/sports/racing/f1/scoreboard`;
+
+
+  async function getf1fixture() {
+    const response = await fetch(`${API_URLF1}`);
+    const data = await response.json();
+    const events = data.events;
+    console.log(events);
+    let matchesFound = false;
+
+    for (const event of events) {
+      if (event.status.type.description !== "Postponed") {
+        const nameofevent = event.shortName;
       const circuitfullname = event.circuit.fullName;
-      const eventDate = new Date(event.date);
-      const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      const eventDayOfWeek = eventDate.getDay();
-      const startTime = new Date(event.date);
-      const currentTime = new Date();
+        const competitions = event.competitions;
 
-      const formula_URL = `https://wrestlemania.f20.us#${nameofevent}`;
-      if (event.status.type.state === "pre") {
-        const container = document.querySelector('#formula1');
-        const teamContainer = document.createElement('div');
+        for (const competition of competitions) {
+                    const eventDate = new Date(competition.date);
+          const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          const eventDayOfWeek = eventDate.getDay();
+          const startTime = new Date(competition.date);
+          const currentTime = new Date();
 
-        teamContainer.innerHTML = `<div class="row">
-          <div class="col-md-6 offset-md-3">
-            <div class="fixture-card" onclick="window.open('${formula_URL}', '_blank')">
-              <div class="row">
-                <div class="col-3">
-                  <img class="team-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/1024px-F1.svg.png" alt="f1 logo">
-                </div>
-                <div class="col-9">
-                  <div id="row">
-                    <div id="col-10">
-                      <h1>${nameofevent}</h1>
-                      <td id='timetd' width='1%'><span id='time'>${circuitfullname}</span></td>
+          const formula_URL = `https://wrestlemania.f20.us#${nameofevent}`;
+          if (competition.status.type.state === "pre") {
+            const container = document.querySelector('#formula1');
+            const teamContainer = document.createElement('div');
+
+            teamContainer.innerHTML = `<div class="row">
+              <div class="col-md-6 offset-md-3">
+                <div class="fixture-card" onclick="window.open('${formula_URL}', '_blank')">
+                  <div class="row">
+                    <div class="col-3">
+                      <img class="team-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/1024px-F1.svg.png" alt="f1 logo">
                     </div>
-                    <div id="col-2">
-                      <td id='timetd' width='1%'><span id='time'></span></td>
+                    <div class="col-9">
+                      <div id="row">
+                        <div id="col-10">
+                          <h1>${nameofevent}</h1>
+                          <td id='timetd' width='1%'><span id='time'>${circuitfullname}</span></td>
+                        </div>
+                        <div id="col-2">
+                          <td id='timetd' width='1%'><span id='time'></span></td>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>`;
+            </div>`;
 
-        // Countdown logic
-        const countdownElement = teamContainer.querySelector('#time');
-        const countdownDate = eventDate.getTime();
+            // Countdown logic
+            const countdownElement = teamContainer.querySelector('#time');
+            const countdownDate = eventDate.getTime();
 
-        function updateCountdown() {
-          const currentTime = new Date().getTime();
-          const distance = countdownDate - currentTime;
+            function updateCountdown() {
+              const currentTime = new Date().getTime();
+              const distance = countdownDate - currentTime;
 
-          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+              const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+              const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+              const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+              const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-          countdownElement.textContent = `${hours}h ${minutes}m ${seconds}s`;
+              countdownElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 
-          if (distance < 0) {
-            clearInterval(countdownInterval);
-            countdownElement.textContent = "Event Started!";
+              if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownElement.textContent = "Event Started!";
+              }
+            }
+
+            updateCountdown();
+            const countdownInterval = setInterval(updateCountdown, 1000);
+
+            container.appendChild(teamContainer);
+            matchesFound = true;
+          } else if (competition.status.type.state === "in" || (competition.status.type.description === "Halftime")) {
+            const container = document.querySelector('#formula1');
+            const teamContainer = document.createElement('div');
+
+            teamContainer.innerHTML = `
+              <div class="row">
+                <div class="col-md-6 offset-md-3">
+                  <div class="fixture-card" onclick="window.open('${formula_URL}', '_blank')">
+                    <div class="row">
+                      <div class="col-3">
+                        <img class="team-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/1024px-F1.svg.png" alt="f1 logo">
+                      </div>
+                      <div class="col-9">
+                        <div id="row">
+                          <div id="col-10">
+                            <h1>${nameofevent}</h1>
+                            <td id='timetd' width='1%'><span id='time'>${circuitfullname}</span></td>
+                          </div>
+                          <div id="col-2">
+                            <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>`;
+
+            container.appendChild(teamContainer);
+            matchesFound = true;
+          } else if (competition.status.type.state === "post") {
+            const container = document.querySelector('#formula1');
+            const teamContainer = document.createElement('div');
+
+            teamContainer.innerHTML = `
+              <div class="row">
+                <div class="col-md-6 offset-md-3">
+                  <div class="fixture-card" onclick="window.open('${formula_URL}', '_blank')">
+                    <div class="row">
+                      <div class="col-3">
+                        <img class="team-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/1024px-F1.svg.png" alt="f1 logo">
+                      </div>
+                      <div class="col-9">
+                        <div id="row">
+                          <div id="col-10">
+                            <h1>${nameofevent}</h1>
+                            <td id='timetd' width='1%'><span id='time'>${circuitfullname}</span></td>
+                          </div>
+                          <div id="col-2">
+                            <td id='timetd' width='1%'><span id='time' >FINISHED</span></td>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>`;
+
+            container.appendChild(teamContainer);
+            matchesFound = true;
           }
         }
-
-        updateCountdown(); // Update the countdown immediately
-
-        const countdownInterval = setInterval(updateCountdown, 1000); // Update the countdown every second
-
-        container.appendChild(teamContainer);
       }
+    }
 
+    if (!matchesFound) {
+      document.getElementById("formula1").style.display = "none";
+    }
+  }
 
-       if (event.status.type.state === "in" || (event.status.type.description === "Halftime")) {
-                  const container = document.querySelector('#formula1');
-              const teamContainer = document.createElement('div');
-                 
-                  teamContainer.innerHTML = `
+  getf1fixture();
 
-                  <div class="row">
-
-                  <div class="col-md-6 offset-md-3">
-                     <div class="fixture-card" onclick="window.open('${formula_URL}', '_blank')">
-                                   <div class="row">
-                                       <div class="col-3">
-                                              <img class="team-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/1024px-F1.svg.png" alt="f1 logo">
-                                         
-                                          </div>
-                                       <div class="col-9">
-                                             <div id="row">
-                                                 <div id="col-10">
-                                                     <h1>${nameofevent}</h1>
-                                                     <td id='timetd' width='1%'><span id='time'>${circuitfullname}</span></td>
-                                                 </div>
-         
-                                                 <div id="col-2">
-
-                                                 <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
-         
-                                                 </div>
-                                             </div>      
-                                       
-                                       </div>
-                                       
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-              `;
-              container.appendChild(teamContainer);
-             
-          }
-          // لو الماتش خلص // 
-           if (event.status.type.state === "post") {
-              
-              const container = document.querySelector('#formula1');
-              const teamContainer = document.createElement('div');
-                 
-                  teamContainer.innerHTML = `
-                  
-
-                  <div class="row">
-
-                  <div class="col-md-6 offset-md-3">
-                     <div class="fixture-card" onclick="window.open('${formula_URL}', '_blank')">
-                                   <div class="row">
-                                       <div class="col-3">
-                                              <img class="team-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/1024px-F1.svg.png" alt="f1 logo">
-                                         
-                                          </div>
-                                       <div class="col-9">
-                                             <div id="row">
-                                                 <div id="col-10">
-                                                     <h1>${nameofevent}</h1>
-                                                     <td id='timetd' width='1%'><span id='time'>${circuitfullname}</span></td>
-                                                 </div>
-         
-                                                 <div id="col-2">
-
-                                                 <td id='timetd' width='1%'><span id='time'>FINISHED</span></td>
-
-         
-                                                 </div>
-                                             </div>      
-                                       
-                                       </div>
-                                       
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-              `;
-              container.appendChild(teamContainer);
-             
-               
-           }
-           
-          matchesFound = true;
-           
-       }
-          }
-           //   IF NO MATCHES TODAY SHOW THIS CODE 
-           if (!matchesFound) {document.getElementById("formula1").style.display = "none";}
-          }
-          getf1fixture()
-          // END OF formula 1 fixture
 
