@@ -1662,8 +1662,7 @@ async function getmmafixture() {
   let matchesFound = false;
   for (const event of events) {
       if (event.status.type.description !== "Postponed"){
-        const homeTeam = event.competitions[0].competitors[0].athlete.displayName;
-        const awayTeam = event.competitions[0].competitors[1].athlete.displayName;
+        const fightnight = event.name;
         const detail = event.status.type.detail;
         const eventId = event.id;
         const eventDate = new Date(event.date);
@@ -1671,36 +1670,34 @@ async function getmmafixture() {
         const eventDayOfWeek = eventDate.getDay();
         const startTime = new Date(event.date);
         const currentTime = new Date();
-     
-        
+
         console.log(events);
-  const mma_URL = `https://live.f20.us/#${Slug}/${eventId}`;
+  const mma_URL = `https://all.f20.us/#${fightnight}`;
   if (event.status.type.state === "pre" ){
      const container = document.querySelector('#mmafixtures');
     const teamContainer = document.createElement('div');
        
-        teamContainer.innerHTML = `
-        <div class="row">
+        teamContainer.innerHTML = `<div class="row">
         <div class="col-md-6 offset-md-3">
-            <div class="fixture-card" onclick="window.open('${mma_URL}', '_blank')">
-                <div class="row">
-                    <div class="col">
-                        <img class="team-logo" src="${ufclogo}" alt="${homeTeam} logo">
-                        <h3 class="team-name">${homeTeam}</h3>
-                    </div>
-                    <div class="col">
-                    <h1>VS</h1>
+          <div class="fixture-card" onclick="window.open('${mma_URL}', '_blank')">
+            <div class="row">
+              <div class="col-3">
+                <img class="team-logo" src="${ufclogo}" alt="UFC logo">
+              </div>
+              <div class="col-9">
+                <div id="row">
+                  <div id="col-10">
+                    <h3>${fightnight}</h3>
+                  </div>
+                  <div id="col-2">
                     <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
-                    </div>
-                    <div class="col">
-                        <img class="team-logo" src="${ufclogo}" alt="${awayTeam} Logo">
-                        <h3 class="team-name">${awayTeam}</h3>
-                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-    `;
+      </div>`;
     container.appendChild(teamContainer); 
       
   }
@@ -1708,29 +1705,27 @@ if (event.status.type.state === "in" || (event.status.type.description === "Half
         const container = document.querySelector('#mmafixtures');
     const teamContainer = document.createElement('div');
        
-        teamContainer.innerHTML = `
-        <div class="row">
+        teamContainer.innerHTML = `<div class="row">
         <div class="col-md-6 offset-md-3">
-            <div class="fixture-card" onclick="window.open('${mma_URL}', '_blank')">
-                <div class="row">
-                    <div class="col">
-                        <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
-                        <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
-                    </div>
-                    <div class="col">
-                 
-                        <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
-                         
-                    </div>
-                    <div class="col">
-                        <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
-                        <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
-                    </div>
+          <div class="fixture-card" onclick="window.open('${mma_URL}', '_blank')">
+            <div class="row">
+              <div class="col-3">
+                <img class="team-logo" src="${ufclogo}" alt="UFC logo">
+              </div>
+              <div class="col-9">
+                <div id="row">
+                  <div id="col-10">
+                    <h3>${fightnight}</h3>
+                  </div>
+                  <div id="col-2">
+                  <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-    `;
+      </div>`;
     container.appendChild(teamContainer);
    
 }
@@ -1740,28 +1735,27 @@ if (event.status.type.state === "in" || (event.status.type.description === "Half
     const container = document.querySelector('#mmafixtures');
     const teamContainer = document.createElement('div');
        
-        teamContainer.innerHTML = `
-        <div class="row">
+        teamContainer.innerHTML = `<div class="row">
         <div class="col-md-6 offset-md-3">
-            <div class="fixture-card" onclick="window.open('${mma_URL}', '_blank')">
-                <div class="row">
-                    <div class="col">
-                        <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
-                        <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
-                    </div>
-                    <div class="col">
-                 
-                     <td>${event.status.type.shortDetail}</td>
-                    </div>
-                    <div class="col">
-                        <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
-                        <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
-                    </div>
+          <div class="fixture-card" onclick="window.open('${mma_URL}', '_blank')">
+            <div class="row">
+              <div class="col-3">
+                <img class="team-logo" src="${ufclogo}" alt="UFC logo">
+              </div>
+              <div class="col-9">
+                <div id="row">
+                  <div id="col-10">
+                    <h3>${fightnight}</h3>
+                  </div>
+                  <div id="col-2">
+                  <td>${event.status.type.shortDetail}</td>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-    `;
+      </div>`;
     container.appendChild(teamContainer);
    
      
