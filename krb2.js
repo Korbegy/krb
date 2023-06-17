@@ -1815,7 +1815,7 @@ getmmafixture()
                     <div class="col-9">
                       <div id="row">
                         <div id="col-10">
-                          <h1>${nameofevent}</h1>
+                        <h3>${nameofevent}</h3>
                           <td id='timetd' width='1%'><span id='time'>${circuitfullname}</span></td>
                         </div>
                         <div id="col-2">
@@ -1869,7 +1869,7 @@ getmmafixture()
                       <div class="col-9">
                         <div id="row">
                           <div id="col-10">
-                            <h1>${nameofevent}</h1>
+                          <h3>${nameofevent}</h3>
                             <td id='timetd' width='1%'><span id='time'>${circuitfullname}</span></td>
                           </div>
                           <div id="col-2">
@@ -1899,7 +1899,7 @@ getmmafixture()
                       <div class="col-9">
                         <div id="row">
                           <div id="col-10">
-                            <h1>${nameofevent}</h1>
+                            <h3>${nameofevent}</h3>
                             <td id='timetd' width='1%'><span id='time'>${circuitfullname}</span></td>
                           </div>
                           <div id="col-2">
