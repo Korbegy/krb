@@ -1675,7 +1675,7 @@ async function getmmafixture() {
         const currentTime = new Date();
 
         console.log(events);
-  const mma_URL = `https://all.f20.us/#${fightnight}`;
+  const mma_URL = `https://f20.us/p/ufc.html#${fightnight}`;
   if (event.status.type.state === "pre" ){
      const container = document.querySelector('#mmafixtures');
     const teamContainer = document.createElement('div');
