@@ -290,75 +290,6 @@
             // END OF PREMIER LEAGUE FIXTURES
 
 
-            // -- NFL FIXTURE --//
-            const API_URLNFL = `https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard`;
- 
-     
-            async function getWeek15Games() {
-              const response = await fetch(`${API_URLNFL}`);
-              const data = await response.json();
-              const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-              const today = new Date();
-              const currentDayOfWeek = today.getDay();
-              const events = data.events;
-              let matchesFound = false;
-              for (const event of events) {
-                if (event.status.type.description !== "Final") {
-                    const homeTeam = event.competitions[0].competitors[0];
-                    const awayTeam = event.competitions[0].competitors[1];
-                    const timeOfMatch = event.status.type.shortDetail;
-                    const weather = event.weather;
-                    const eventDate = new Date(event.date);
-                    const detail = event.status.type.detail;
-                    const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });   
-                    const eventDayOfWeek = eventDate.getDay();
-                    const startTime = new Date(event.date);
-                    const currentTime = new Date();
-                    const hometeamscore = event.competitions[0].competitors[0].score;
-                    const awayteamscore = event.competitions[0].competitors[1].score;
-
-
-                    const M_URL = `https://nfl.f20.us/#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`; 
-                    if (event.status.type.description === "In Progress" || ((event.status.type.description === "Scheduled") && (eventDayOfWeek === currentDayOfWeek) || (event.status.type.description === "Halftime"))) {
-                    const container = document.querySelector('#nflfixtures');
-                const teamContainer = document.createElement('div');
-                    teamContainer.innerHTML = `
-                    <div class="row">
-                    <div class="col-md-6 offset-md-3">
-                        <div class="fixture-card" onclick="window.open('${M_URL}', '_blank')">
-                            <div class="row">
-                                <div class="col">
-                                    <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
-                                    <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
-                                </div>
-                                <div class="col">
-                                <h1>VS</h1>
-                                <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
-                                </div>
-                                <div class="col">
-                                    <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
-                                    <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              
-                `;
-                container.appendChild(teamContainer);
-            }
-            
-            matchesFound = true;
-             }
-           console.log(events)
-              }
-            //   IF NO MATCHES TODAY SHOW THIS CODE 
-            if (!matchesFound) {document.getElementById("nflfixtures").style.display = "none";}
-           }
-            getWeek15Games();
-            // -- END OF NFL API CODE ---//
-
-
              // -- FIFA FRIENDLY  --//
 
  
@@ -2213,3 +2144,874 @@ getgoldfixture()
              getclubfriendlyfixture()
              // END CLUB FRIENDLY -- // 
 
+
+             
+            // -- NFL FIXTURE --//
+            const API_URLNFL = `https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=${formattedDate}`;
+ 
+     
+            async function getWeek15Games() {
+              const response = await fetch(`${API_URLNFL}`);
+              const data = await response.json();
+              const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+              const today = new Date();
+              const currentDayOfWeek = today.getDay();
+              const league = data.leagues;
+              const Slug = league[0].slug;
+              const events = data.events;
+              let matchesFound = false;
+              for (const event of events) {
+                if (event.status.type.completed !== true) {
+                    const homeTeam = event.competitions[0].competitors[0].team.shortDisplayName;
+                    const awayTeam = event.competitions[0].competitors[1].team.shortDisplayName;
+                    const Hlogo = event.competitions[0].competitors[0].team.logo;
+                    const Alogo = event.competitions[0].competitors[1].team.logo;
+                    const timeOfMatch = event.status.type.shortDetail;
+                    const weather = event.weather.displayValue;
+                    const season = event.season.slug;
+                    const eventDate = new Date(event.date);
+                    const detail = event.status.type.detail;
+                    const eventId = event.id;
+                    const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });   
+                    const startTime = new Date(event.date);
+                    const currentTime = new Date();
+                    const hometeamscore = event.competitions[0].competitors[0].score;
+                    const awayteamscore = event.competitions[0].competitors[1].score;
+
+
+                    const M_URL = `https://nfl.f20.us/#football/${Slug}/${eventId}`; 
+
+                    if (event.status.type.state === "in" || (event.status.type.state === "pre")) {
+
+                
+
+
+                    const container = document.querySelector('#nflfixtures');
+                    const teamContainer = document.createElement('div');
+                    teamContainer.innerHTML = `
+                    <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <div class="fixture-card" onclick="window.open('${M_URL}', '_blank')">
+                            <div class="row">
+                                <div class="col">
+                                    <img class="team-logo" src="${Hlogo}" alt="${homeTeam} logo">
+                                    <h3 class="team-name">${homeTeam}</h3>
+                                </div>
+                                <div class="col">
+                                <h1>VS</h1>
+                                <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
+                                </div>
+                                <div class="col">
+                                    <img class="team-logo" src="${Alogo}" alt="${awayTeam} Logo">
+                                    <h3 class="team-name">${awayTeam}</h3>
+                                </div>
+                            </div>
+                                    <div class='col'>
+                                    ${season}
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+              
+                `;
+                container.appendChild(teamContainer);
+            }
+            matchesFound = true;
+             }
+           console.log(events)
+              }
+            //   IF NO MATCHES TODAY SHOW THIS CODE 
+            if (!matchesFound) {document.getElementById("nflfixtures").style.display = "none";}
+           }
+            getWeek15Games();
+            // -- END OF NFL API CODE ---//
+
+
+
+        // nba live streaming now //
+
+         // NBA
+   
+   
+const API_URLNBA = `https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=${formattedDate}`;
+async function getNBA() {
+  const response = await fetch(`${API_URLNBA}`);
+  const data = await response.json();
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const today = new Date();
+  const currentDayOfWeek = today.getDay();
+  const league = data.leagues;
+  const Slug = league[0].slug;
+  const events = data.events;
+   let matchesFound = false;
+  for (const event of events) {
+    if (event.status.type.description !== "Final") {
+        const homeTeam = event.competitions[0].competitors[0].team.shortDisplayName;
+        const awayTeam = event.competitions[0].competitors[1].team.shortDisplayName;
+        const Hlogo = event.competitions[0].competitors[0].team.logo;
+        const Alogo = event.competitions[0].competitors[1].team.logo;
+        const timeOfMatch = event.status.type.shortDetail;
+        const weather = event.weather;
+        const eventDate = new Date(event.date);
+        const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const eventDayOfWeek = eventDate.getDay();
+        const startTime = new Date(event.date);
+        const eventId = event.id;
+        const currentTime = new Date();
+        const NBA_URL = `https://nba.f20.us/#basketball/${Slug}/${eventId}`;
+
+        if (event.status.type.state == "pre" || (event.status.type.state == "in")) {
+        const container = document.querySelector('#nbafixtures');
+        const teamContainer = document.createElement('div');
+        teamContainer.innerHTML = `
+    <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <div class="fixture-card" onclick="window.open('${NBA_URL}', '_blank')">
+                            <div class="row">
+                                <div class="col">
+                                    <img class="team-logo" src="${Hlogo}" alt="${homeTeam} logo">
+                                    <h3 class="team-name">${homeTeam}</h3>
+                                </div>
+                                <div class="col">
+                                <h1>VS</h1>
+                                <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
+                                </div>
+                                <div class="col">
+                                    <img class="team-logo" src="${Alogo}" alt="${awayTeam} Logo">
+                                    <h3 class="team-name">${awayTeam}</h3>
+                                </div>
+                            </div>
+                                    <div class='col'>
+                                    ${season}
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+    `;
+    
+    container.appendChild(teamContainer);
+}
+matchesFound = true;
+ }
+ 
+  }
+  //   IF NO MATCHES TODAY SHOW THIS CODE 
+if (!matchesFound) {document.getElementById("nbafixtures").style.display = "none";}
+}
+getNBA();
+// END OF NBA API CODE 
+
+
+
+
+ // -- carabao cup fixtures  --//
+
+ 
+ const API_carabao = `https://site.api.espn.com/apis/site/v2/sports/soccer/eng.league_cup/scoreboard?dates=${formattedDate}`;
+ 
+   
+ async function getcarabaofixture() {
+   const response = await fetch(`${API_carabao}`);
+   const data = await response.json();
+   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+   const today = new Date();
+   const currentDayOfWeek = today.getDay();
+   const league = data.leagues;
+   const Slug = league[0].slug;
+   const events = data.events;
+   let matchesFound = false;
+   for (const event of events) {
+       if (event.status.type.description !== "Postponed"){
+         const homeTeam = event.competitions[0].competitors[0];
+         const awayTeam = event.competitions[0].competitors[1];
+         const detail = event.status.type.detail;
+         const eventId = event.id;
+         const eventDate = new Date(event.date);
+         const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });   
+         const eventDayOfWeek = eventDate.getDay();
+         const startTime = new Date(event.date);
+         const currentTime = new Date();
+         const hometeamscore = event.competitions[0].competitors[0].score;
+         const awayteamscore = event.competitions[0].competitors[1].score;
+         console.log(league);
+   const carabao_URL = `https://live.f20.us/#${Slug}/${eventId}`;
+   if (event.status.type.state === "pre"){
+      const container = document.querySelector('#carfixtures');
+     const teamContainer = document.createElement('div');
+        
+         teamContainer.innerHTML = `
+         <div class="row">
+         <div class="col-md-6 offset-md-3">
+             <div class="fixture-card" onclick="window.open('${carabao_URL}', '_blank')">
+                 <div class="row">
+                     <div class="col">
+                         <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
+                         <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
+                     </div>
+                     <div class="col">
+                     <h1>VS</h1>
+                     <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
+                     </div>
+                     <div class="col">
+                         <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
+                         <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     `;
+     container.appendChild(teamContainer); 
+       
+   }
+if (event.status.type.state === "in" || (event.status.type.description === "Halftime")) {
+         const container = document.querySelector('#carfixtures');
+     const teamContainer = document.createElement('div');
+        
+         teamContainer.innerHTML = `
+         <div class="row">
+         <div class="col-md-6 offset-md-3">
+             <div class="fixture-card" onclick="window.open('${carabao_URL}', '_blank')">
+                 <div class="row">
+                     <div class="col">
+                         <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
+                         <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
+                     </div>
+                     <div class="col">
+                  <h1 id='time'>
+                 
+                     ${hometeamscore} : ${awayteamscore}
+                      
+                      </h1>
+                         <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
+                          
+                     </div>
+                     <div class="col">
+                         <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
+                         <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     `;
+     container.appendChild(teamContainer);
+    
+ }
+ // لو الماتش خلص // 
+  if (event.status.type.state === "post") {
+     
+     const container = document.querySelector('#carfixtures');
+     const teamContainer = document.createElement('div');
+        
+         teamContainer.innerHTML = `
+         <div class="row">
+         <div class="col-md-6 offset-md-3">
+             <div class="fixture-card" onclick="window.open('${carabao_URL}', '_blank')">
+                 <div class="row">
+                     <div class="col">
+                         <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
+                         <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
+                     </div>
+                     <div class="col">
+                  <h1 id='time'>
+                 
+                     ${hometeamscore} : ${awayteamscore}
+                      
+                      </h1>
+                      <td>${event.status.type.shortDetail}</td>
+                     </div>
+                     <div class="col">
+                         <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
+                         <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     `;
+     container.appendChild(teamContainer);
+    
+      
+  }
+  
+ matchesFound = true;
+  
+}
+ }
+  //   IF NO MATCHES TODAY SHOW THIS CODE 
+  if (!matchesFound) {document.getElementById("carfixtures").style.display = "none";}
+ }
+ getcarabaofixture()
+ // carabao cup -- // 
+
+
+
+ // -- fa cup fixtures  --//
+
+ 
+ const API_facup = `https://site.api.espn.com/apis/site/v2/sports/soccer/eng.fa/scoreboard?dates=${formattedDate}`;
+ 
+   
+ async function getfafixture() {
+   const response = await fetch(`${API_facup}`);
+   const data = await response.json();
+   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+   const today = new Date();
+   const currentDayOfWeek = today.getDay();
+   const league = data.leagues;
+   const Slug = league[0].slug;
+   const events = data.events;
+   let matchesFound = false;
+   for (const event of events) {
+       if (event.status.type.description !== "Postponed"){
+         const homeTeam = event.competitions[0].competitors[0];
+         const awayTeam = event.competitions[0].competitors[1];
+         const detail = event.status.type.detail;
+         const eventId = event.id;
+         const eventDate = new Date(event.date);
+         const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });   
+         const eventDayOfWeek = eventDate.getDay();
+         const startTime = new Date(event.date);
+         const currentTime = new Date();
+         const hometeamscore = event.competitions[0].competitors[0].score;
+         const awayteamscore = event.competitions[0].competitors[1].score;
+         console.log(league);
+   const fa_URL = `https://live.f20.us/#${Slug}/${eventId}`;
+   if (event.status.type.state === "pre"){
+      const container = document.querySelector('#fafixtures');
+     const teamContainer = document.createElement('div');
+        
+         teamContainer.innerHTML = `
+         <div class="row">
+         <div class="col-md-6 offset-md-3">
+             <div class="fixture-card" onclick="window.open('${fa_URL}', '_blank')">
+                 <div class="row">
+                     <div class="col">
+                         <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
+                         <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
+                     </div>
+                     <div class="col">
+                     <h1>VS</h1>
+                     <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
+                     </div>
+                     <div class="col">
+                         <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
+                         <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     `;
+     container.appendChild(teamContainer); 
+       
+   }
+if (event.status.type.state === "in" || (event.status.type.description === "Halftime")) {
+         const container = document.querySelector('#fafixtures');
+     const teamContainer = document.createElement('div');
+        
+         teamContainer.innerHTML = `
+         <div class="row">
+         <div class="col-md-6 offset-md-3">
+             <div class="fixture-card" onclick="window.open('${fa_URL}', '_blank')">
+                 <div class="row">
+                     <div class="col">
+                         <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
+                         <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
+                     </div>
+                     <div class="col">
+                  <h1 id='time'>
+                 
+                     ${hometeamscore} : ${awayteamscore}
+                      
+                      </h1>
+                         <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
+                          
+                     </div>
+                     <div class="col">
+                         <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
+                         <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     `;
+     container.appendChild(teamContainer);
+    
+ }
+ // لو الماتش خلص // 
+  if (event.status.type.state === "post") {
+     
+     const container = document.querySelector('#fafixtures');
+     const teamContainer = document.createElement('div');
+        
+         teamContainer.innerHTML = `
+         <div class="row">
+         <div class="col-md-6 offset-md-3">
+             <div class="fixture-card" onclick="window.open('${fa_URL}', '_blank')">
+                 <div class="row">
+                     <div class="col">
+                         <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
+                         <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
+                     </div>
+                     <div class="col">
+                  <h1 id='time'>
+                 
+                     ${hometeamscore} : ${awayteamscore}
+                      
+                      </h1>
+                      <td>${event.status.type.shortDetail}</td>
+                     </div>
+                     <div class="col">
+                         <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
+                         <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     `;
+     container.appendChild(teamContainer);
+    
+      
+  }
+  
+ matchesFound = true;
+  
+}
+ }
+  //   IF NO MATCHES TODAY SHOW THIS CODE 
+  if (!matchesFound) {document.getElementById("fafixtures").style.display = "none";}
+ }
+ getfafixture()
+ // fa cup -- // 
+
+
+ // -- mxfixtures  --//
+
+ 
+ const API_mx = `https://site.api.espn.com/apis/site/v2/sports/soccer/mex.1/scoreboard?dates=${formattedDate}`;
+ 
+   
+ async function getmxfixture() {
+   const response = await fetch(`${API_mx}`);
+   const data = await response.json();
+   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+   const today = new Date();
+   const currentDayOfWeek = today.getDay();
+   const league = data.leagues;
+   const Slug = league[0].slug;
+   const events = data.events;
+   let matchesFound = false;
+   for (const event of events) {
+       if (event.status.type.description !== "Postponed"){
+         const homeTeam = event.competitions[0].competitors[0];
+         const awayTeam = event.competitions[0].competitors[1];
+         const detail = event.status.type.detail;
+         const eventId = event.id;
+         const eventDate = new Date(event.date);
+         const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });   
+         const eventDayOfWeek = eventDate.getDay();
+         const startTime = new Date(event.date);
+         const currentTime = new Date();
+         const hometeamscore = event.competitions[0].competitors[0].score;
+         const awayteamscore = event.competitions[0].competitors[1].score;
+         console.log(league);
+   const mx_URL = `https://live.f20.us/#${Slug}/${eventId}`;
+   if (event.status.type.state === "pre"){
+      const container = document.querySelector('#mxfixtures');
+     const teamContainer = document.createElement('div');
+        
+         teamContainer.innerHTML = `
+         <div class="row">
+         <div class="col-md-6 offset-md-3">
+             <div class="fixture-card" onclick="window.open('${mx_URL}', '_blank')">
+                 <div class="row">
+                     <div class="col">
+                         <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
+                         <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
+                     </div>
+                     <div class="col">
+                     <h1>VS</h1>
+                     <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
+                     </div>
+                     <div class="col">
+                         <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
+                         <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     `;
+     container.appendChild(teamContainer); 
+       
+   }
+if (event.status.type.state === "in" || (event.status.type.description === "Halftime")) {
+         const container = document.querySelector('#mxfixtures');
+     const teamContainer = document.createElement('div');
+        
+         teamContainer.innerHTML = `
+         <div class="row">
+         <div class="col-md-6 offset-md-3">
+             <div class="fixture-card" onclick="window.open('${mx_URL}', '_blank')">
+                 <div class="row">
+                     <div class="col">
+                         <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
+                         <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
+                     </div>
+                     <div class="col">
+                  <h1 id='time'>
+                 
+                     ${hometeamscore} : ${awayteamscore}
+                      
+                      </h1>
+                         <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
+                          
+                     </div>
+                     <div class="col">
+                         <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
+                         <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     `;
+     container.appendChild(teamContainer);
+    
+ }
+ // لو الماتش خلص // 
+  if (event.status.type.state === "post") {
+     
+     const container = document.querySelector('#mxfixtures');
+     const teamContainer = document.createElement('div');
+        
+         teamContainer.innerHTML = `
+         <div class="row">
+         <div class="col-md-6 offset-md-3">
+             <div class="fixture-card" onclick="window.open('${mx_URL}', '_blank')">
+                 <div class="row">
+                     <div class="col">
+                         <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
+                         <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
+                     </div>
+                     <div class="col">
+                  <h1 id='time'>
+                 
+                     ${hometeamscore} : ${awayteamscore}
+                      
+                      </h1>
+                      <td>${event.status.type.shortDetail}</td>
+                     </div>
+                     <div class="col">
+                         <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
+                         <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     `;
+     container.appendChild(teamContainer);
+    
+      
+  }
+  
+ matchesFound = true;
+  
+}
+ }
+  //   IF NO MATCHES TODAY SHOW THIS CODE 
+  if (!matchesFound) {document.getElementById("mxfixtures").style.display = "none";}
+ }
+ getmxfixture()
+ // liga mx fixtures -- // 
+
+
+ 
+ // -- fra fixtures  --//
+
+ 
+ const API_fra = `https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/scoreboard?dates=${formattedDate}`;
+ 
+   
+ async function getfrafixture() {
+   const response = await fetch(`${API_fra}`);
+   const data = await response.json();
+   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+   const today = new Date();
+   const currentDayOfWeek = today.getDay();
+   const league = data.leagues;
+   const Slug = league[0].slug;
+   const events = data.events;
+   let matchesFound = false;
+   for (const event of events) {
+       if (event.status.type.description !== "Postponed"){
+         const homeTeam = event.competitions[0].competitors[0];
+         const awayTeam = event.competitions[0].competitors[1];
+         const detail = event.status.type.detail;
+         const eventId = event.id;
+         const eventDate = new Date(event.date);
+         const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });   
+         const eventDayOfWeek = eventDate.getDay();
+         const startTime = new Date(event.date);
+         const currentTime = new Date();
+         const hometeamscore = event.competitions[0].competitors[0].score;
+         const awayteamscore = event.competitions[0].competitors[1].score;
+         console.log(league);
+   const fra_URL = `https://live.f20.us/#${Slug}/${eventId}`;
+   if (event.status.type.state === "pre"){
+      const container = document.querySelector('#frafixtures');
+     const teamContainer = document.createElement('div');
+        
+         teamContainer.innerHTML = `
+         <div class="row">
+         <div class="col-md-6 offset-md-3">
+             <div class="fixture-card" onclick="window.open('${fra_URL}', '_blank')">
+                 <div class="row">
+                     <div class="col">
+                         <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
+                         <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
+                     </div>
+                     <div class="col">
+                     <h1>VS</h1>
+                     <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
+                     </div>
+                     <div class="col">
+                         <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
+                         <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     `;
+     container.appendChild(teamContainer); 
+       
+   }
+if (event.status.type.state === "in" || (event.status.type.description === "Halftime")) {
+         const container = document.querySelector('#frafixtures');
+     const teamContainer = document.createElement('div');
+        
+         teamContainer.innerHTML = `
+         <div class="row">
+         <div class="col-md-6 offset-md-3">
+             <div class="fixture-card" onclick="window.open('${fra_URL}', '_blank')">
+                 <div class="row">
+                     <div class="col">
+                         <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
+                         <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
+                     </div>
+                     <div class="col">
+                  <h1 id='time'>
+                 
+                     ${hometeamscore} : ${awayteamscore}
+                      
+                      </h1>
+                         <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
+                          
+                     </div>
+                     <div class="col">
+                         <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
+                         <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     `;
+     container.appendChild(teamContainer);
+    
+ }
+ // لو الماتش خلص // 
+  if (event.status.type.state === "post") {
+     
+     const container = document.querySelector('#frafixtures');
+     const teamContainer = document.createElement('div');
+        
+         teamContainer.innerHTML = `
+         <div class="row">
+         <div class="col-md-6 offset-md-3">
+             <div class="fixture-card" onclick="window.open('${fra_URL}', '_blank')">
+                 <div class="row">
+                     <div class="col">
+                         <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
+                         <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
+                     </div>
+                     <div class="col">
+                  <h1 id='time'>
+                 
+                     ${hometeamscore} : ${awayteamscore}
+                      
+                      </h1>
+                      <td>${event.status.type.shortDetail}</td>
+                     </div>
+                     <div class="col">
+                         <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
+                         <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     `;
+     container.appendChild(teamContainer);
+    
+      
+  }
+  
+ matchesFound = true;
+  
+}
+ }
+  //   IF NO MATCHES TODAY SHOW THIS CODE 
+  if (!matchesFound) {document.getElementById("frafixtures").style.display = "none";}
+ }
+ getfrafixture()
+ // liga fra fixtures -- // 
+
+
+ 
+ // -- copa del rey  --//
+
+ 
+ const API_copadelrey = `https://site.api.espn.com/apis/site/v2/sports/soccer/esp.copa_del_rey/scoreboard?dates=${formattedDate}`;
+ 
+   
+ async function getdelreyfixture() {
+   const response = await fetch(`${API_copadelrey}`);
+   const data = await response.json();
+   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+   const today = new Date();
+   const currentDayOfWeek = today.getDay();
+   const league = data.leagues;
+   const Slug = league[0].slug;
+   const events = data.events;
+   let matchesFound = false;
+   for (const event of events) {
+       if (event.status.type.description !== "Postponed"){
+         const homeTeam = event.competitions[0].competitors[0];
+         const awayTeam = event.competitions[0].competitors[1];
+         const detail = event.status.type.detail;
+         const eventId = event.id;
+         const eventDate = new Date(event.date);
+         const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });   
+         const eventDayOfWeek = eventDate.getDay();
+         const startTime = new Date(event.date);
+         const currentTime = new Date();
+         const hometeamscore = event.competitions[0].competitors[0].score;
+         const awayteamscore = event.competitions[0].competitors[1].score;
+         console.log(league);
+   const delrey_URL = `https://live.f20.us/#${Slug}/${eventId}`;
+   if (event.status.type.state === "pre"){
+      const container = document.querySelector('#delreyfixtures');
+     const teamContainer = document.createElement('div');
+        
+         teamContainer.innerHTML = `
+         <div class="row">
+         <div class="col-md-6 offset-md-3">
+             <div class="fixture-card" onclick="window.open('${delrey_URL}', '_blank')">
+                 <div class="row">
+                     <div class="col">
+                         <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
+                         <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
+                     </div>
+                     <div class="col">
+                     <h1>VS</h1>
+                     <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
+                     </div>
+                     <div class="col">
+                         <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
+                         <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     `;
+     container.appendChild(teamContainer); 
+       
+   }
+if (event.status.type.state === "in" || (event.status.type.description === "Halftime")) {
+         const container = document.querySelector('#delreyfixtures');
+     const teamContainer = document.createElement('div');
+        
+         teamContainer.innerHTML = `
+         <div class="row">
+         <div class="col-md-6 offset-md-3">
+             <div class="fixture-card" onclick="window.open('${delrey_URL}', '_blank')">
+                 <div class="row">
+                     <div class="col">
+                         <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
+                         <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
+                     </div>
+                     <div class="col">
+                  <h1 id='time'>
+                 
+                     ${hometeamscore} : ${awayteamscore}
+                      
+                      </h1>
+                         <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
+                          
+                     </div>
+                     <div class="col">
+                         <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
+                         <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     `;
+     container.appendChild(teamContainer);
+    
+ }
+ // لو الماتش خلص // 
+  if (event.status.type.state === "post") {
+     
+     const container = document.querySelector('#delreyfixtures');
+     const teamContainer = document.createElement('div');
+        
+         teamContainer.innerHTML = `
+         <div class="row">
+         <div class="col-md-6 offset-md-3">
+             <div class="fixture-card" onclick="window.open('${delrey_URL}', '_blank')">
+                 <div class="row">
+                     <div class="col">
+                         <img class="team-logo" src="${homeTeam.team.logo}" alt="${homeTeam.team.displayName} logo">
+                         <h3 class="team-name">${homeTeam.team.shortDisplayName}</h3>
+                     </div>
+                     <div class="col">
+                  <h1 id='time'>
+                 
+                     ${hometeamscore} : ${awayteamscore}
+                      
+                      </h1>
+                      <td>${event.status.type.shortDetail}</td>
+                     </div>
+                     <div class="col">
+                         <img class="team-logo" src="${awayTeam.team.logo}" alt="${awayTeam.team.displayName} Logo">
+                         <h3 class="team-name">${awayTeam.team.shortDisplayName}</h3>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     `;
+     container.appendChild(teamContainer);
+    
+      
+  }
+  
+ matchesFound = true;
+  
+}
+ }
+  //   IF NO MATCHES TODAY SHOW THIS CODE 
+  if (!matchesFound) {document.getElementById("delreyfixtures").style.display = "none";}
+ }
+ getdelreyfixture()
+ // copa del rey -- // 
