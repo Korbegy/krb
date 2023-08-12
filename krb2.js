@@ -178,7 +178,7 @@
                     const hometeamscore = event.competitions[0].competitors[0].score;
                     const awayteamscore = event.competitions[0].competitors[1].score;
                     console.log(league);
-              const premierleague_URL = `https://premierleague.f20.us/#${Slug}/${eventId}`;
+              const premierleague_URL = `https://live.f20.us/#${Slug}/${eventId}`;
               if (event.status.type.state === "pre"){
                  const container = document.querySelector('#plfixtures');
                 const teamContainer = document.createElement('div');
@@ -2181,10 +2181,7 @@ getgoldfixture()
 
                     const M_URL = `https://nfl.f20.us/#football/${Slug}/${eventId}`; 
 
-                    if (event.status.type.state === "in" || (event.status.type.state === "pre")) {
-
-                
-
+                    if (event.status.type.state === "pre") {
 
                     const container = document.querySelector('#nflfixtures');
                     const teamContainer = document.createElement('div');
@@ -2216,6 +2213,43 @@ getgoldfixture()
                 `;
                 container.appendChild(teamContainer);
             }
+
+
+            if (event.status.type.state === "in") {
+
+                const container = document.querySelector('#nflfixtures');
+                const teamContainer = document.createElement('div');
+                teamContainer.innerHTML = `
+                <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="fixture-card" onclick="window.open('${M_URL}', '_blank')">
+                        <div class="row">
+                            <div class="col">
+                                <img class="team-logo" src="${Hlogo}" alt="${homeTeam} logo">
+                                <h3 class="team-name">${homeTeam}</h3>
+                            </div>
+                            <div class="col">
+                              <h1 id='time'>
+                             
+                                 ${hometeamscore} : ${awayteamscore}
+                                  
+                                  </h1>
+                                     <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
+                                      
+                                 </div>
+                            <div class="col">
+                                <img class="team-logo" src="${Alogo}" alt="${awayTeam} Logo">
+                                <h3 class="team-name">${awayTeam}</h3>
+                            </div>
+                        </div>
+                                
+                    </div>
+                </div>
+            </div>
+          
+            `;
+            container.appendChild(teamContainer);
+        }
             matchesFound = true;
              }
            console.log(events)
