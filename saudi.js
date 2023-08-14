@@ -60,7 +60,7 @@ async function getsportsfixture() {
                             <div class="fixture-card" onclick="window.open('${link}', '_blank')">
                                 <div class="row">
                                     <div class="col">
-                                        <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${HLogo}" alt="${homeTeam} logo">
+                                        <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_200,h_200,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${HLogo}" alt="${homeTeam} logo">
                                         <h3 class="team-name">${homeTeam}</h3>
                                     </div>
                                     <div class="col">
@@ -68,7 +68,7 @@ async function getsportsfixture() {
                                         <span id="time">${estTimeStr}</span>
                                     </div>
                                     <div class="col">
-                                        <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${ALogo}" alt="${awayTeam} Logo">
+                                        <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_200,h_200,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${ALogo}" alt="${awayTeam} Logo">
                                         <h3 class="team-name">${awayTeam}</h3>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@ async function getsportsfixture() {
                                 <div class="fixture-card" onclick="window.open('${link}', '_blank')">
                                     <div class="row">
                                         <div class="col">
-                                            <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${HLogo}" alt="${homeTeam} logo">
+                                            <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_200,h_200,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${HLogo}" alt="${homeTeam} logo">
                                             <h3 class="team-name">${homeTeam}</h3>
                                         </div>
                                         <div class="col">
@@ -114,7 +114,7 @@ async function getsportsfixture() {
                                         <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> ${minu} LIVE</span></td>
                                         </div>
                                         <div class="col">
-                                            <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${ALogo}" alt="${awayTeam} Logo">
+                                            <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_200,h_200,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${ALogo}" alt="${awayTeam} Logo">
                                             <h3 class="team-name">${awayTeam}</h3>
                                         </div>
                                     </div>
