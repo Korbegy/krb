@@ -21,7 +21,7 @@ async function getsportsfixture() {
         }
     }
 
-    // Add "Saudi" element before the first scheduled game
+    // هنا اضافة الاسم قبل البتاع الاول بس 
     if (firstScheduledIndex !== -1) {
         const champElement = document.createElement('p');
         champElement.className = 'champ';
@@ -31,6 +31,7 @@ async function getsportsfixture() {
 
     // Render all scheduled games
     for (const sport of Sports) {
+        if (sport.statusText !== "Ended" && (sport.statusText !== "Final")) {
         if (sport.statusText === "Scheduled") {
             const gameDate = new Date(sport.startTime);
             // Check if the game is scheduled for today
@@ -77,6 +78,52 @@ async function getsportsfixture() {
                 container.appendChild(teamContainer);
             }
         }
+        
+                // if live  now
+                if (sport.statusText !== "Scheduled") { 
+                    const homeTeam = sport.homeCompetitor.name;
+                    const awayTeam = sport.awayCompetitor.name;
+                    const HLogo = sport.homeCompetitor.id;
+                    const ALogo = sport.awayCompetitor.id;
+                    const hometeamscore = sport.homeCompetitor.score;
+                    const awayteamscore = sport.awayCompetitor.score;
+                    const minu = sport.gameTimeDisplay;
+                    const link = `https://live.f20.us/`;
+    
+                    const teamContainer = document.createElement('div');
+                    teamContainer.innerHTML = `
+                        <div class="row">
+                            <div class="col-md-6 offset-md-3">
+                                <div class="fixture-card" onclick="window.open('${link}', '_blank')">
+                                    <div class="row">
+                                        <div class="col">
+                                            <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${HLogo}" alt="${homeTeam} logo">
+                                            <h3 class="team-name">${homeTeam}</h3>
+                                        </div>
+                                        <div class="col">
+                                        <h1 id='time'>
+                             
+                                        ${hometeamscore} : ${awayteamscore}
+                                         
+                                         </h1>
+                                        
+   
+                                        <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> ${minu} LIVE</span></td>
+                                        </div>
+                                        <div class="col">
+                                            <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${ALogo}" alt="${awayTeam} Logo">
+                                            <h3 class="team-name">${awayTeam}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+    
+                    container.appendChild(teamContainer);
+   
+                } // if live 
+            }
     }
 }
 
