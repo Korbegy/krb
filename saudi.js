@@ -51,7 +51,7 @@ async function getsportsfixture() {
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
                 const gameID = sport.id;
-                const link = `https://weego365.f20.us/#${gameID}/${leagueSlug}`;
+                const link = `https://weego365.f20.us/#${gameID}#${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
