@@ -178,7 +178,7 @@
                     const hometeamscore = event.competitions[0].competitors[0].score;
                     const awayteamscore = event.competitions[0].competitors[1].score;
                     console.log(league);
-              const premierleague_URL = `https://live.f20.us/#${Slug}/${eventId}`;
+              const premierleague_URL = `https://premierleague.f20.us/#${Slug}/${eventId}`;
               if (event.status.type.state === "pre"){
                  const container = document.querySelector('#plfixtures');
                 const teamContainer = document.createElement('div');
