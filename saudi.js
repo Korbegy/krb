@@ -8,6 +8,7 @@ async function getsportsfixture() {
     const currentDayOfWeek = today.getDay();
     const Sports = data.games;
     const leagueName = data.competitions[0].name;
+    const leagueSlug = data.competitions[0].nameForURL;
 
     const container = document.querySelector('#new');
     container.innerHTML = ''; // Clear the container before adding today's fixtures
@@ -49,7 +50,8 @@ async function getsportsfixture() {
                 const hometeamscore = sport.homeCompetitor.score;
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
-                const link = `https://live.f20.us/`;
+                const gameID = sport.id;
+                const link = `https://weego365.f20.us/#${gameID}/${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
