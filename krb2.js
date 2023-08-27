@@ -746,7 +746,7 @@
                      const hometeamscore = event.competitions[0].competitors[0].score;
                      const awayteamscore = event.competitions[0].competitors[1].score;
                      console.log(league);
-               const es_URL = `https://live.f20.us/#${Slug}/${eventId}`;
+               const es_URL = `https://hesgoal.f20.us/#${Slug}/${eventId}`;
                if (event.status.type.state === "pre"){
                   const container = document.querySelector('#esfixtures');
                  const teamContainer = document.createElement('div');
