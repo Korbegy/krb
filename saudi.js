@@ -646,7 +646,7 @@ async function getasia() {
     // Render all scheduled games
     for (const sport of Sports) {
         
-        if (sport.statusText !== "Ended" && (sport.statusText !== "Final")) {
+        if (sport.statusText !== "Ended" && (sport.statusText !== "After ET")) {
             
         if (sport.statusText === "Scheduled") {
             
