@@ -3049,3 +3049,117 @@ if (event.status.type.state === "in" || (event.status.type.description === "Half
  }
  getdelreyfixture()
  // copa del rey -- // 
+
+
+ // -- MLB FIXTURE --//
+ const API_URLmlb = `http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard?dates=${formattedDate}`;
+ 
+     
+ async function getmlb() {
+   const response = await fetch(`${API_URLmlb}`);
+   const data = await response.json();
+   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+   const today = new Date();
+   const currentDayOfWeek = today.getDay();
+   const league = data.leagues;
+   const Slug = league[0].slug;
+   const events = data.events;
+   let matchesFound = false;
+   for (const event of events) {
+     if (event.status.type.completed !== true) {
+         const homeTeam = event.competitions[0].competitors[0].team.shortDisplayName;
+         const awayTeam = event.competitions[0].competitors[1].team.shortDisplayName;
+         const Hlogo = event.competitions[0].competitors[0].team.logo;
+         const Alogo = event.competitions[0].competitors[1].team.logo;
+         const timeOfMatch = event.status.type.shortDetail;
+         const weather = event.weather.displayValue;
+         const season = event.season.slug;
+         const eventDate = new Date(event.date);
+         const detail = event.status.type.detail;
+         const eventId = event.id;
+         const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });   
+         const startTime = new Date(event.date);
+         const currentTime = new Date();
+         const hometeamscore = event.competitions[0].competitors[0].score;
+         const awayteamscore = event.competitions[0].competitors[1].score;
+
+
+         const mlb_URL = `https://live.f20.us/#baseball/${Slug}/${eventId}`; 
+
+         if (event.status.type.state === "pre") {
+
+         const container = document.querySelector('#mlbfixtures');
+         const teamContainer = document.createElement('div');
+         teamContainer.innerHTML = `
+         <div class="row">
+         <div class="col-md-6 offset-md-3">
+             <div class="fixture-card" onclick="window.open('${mlb_URL}', '_blank')">
+                 <div class="row">
+                     <div class="col">
+                         <img class="team-logo" src="${Hlogo}" alt="${homeTeam} logo">
+                         <h3 class="team-name">${homeTeam}</h3>
+                     </div>
+                     <div class="col">
+                     <h1>VS</h1>
+                     <td id='timetd' width='1%'><span id='time'>${estTimeStr}</span></td>
+                     </div>
+                     <div class="col">
+                         <img class="team-logo" src="${Alogo}" alt="${awayTeam} Logo">
+                         <h3 class="team-name">${awayTeam}</h3>
+                     </div>
+                 </div>
+                       
+             </div>
+         </div>
+     </div>
+   
+     `;
+     container.appendChild(teamContainer);
+ }
+
+
+ if (event.status.type.state === "in") {
+
+     const container = document.querySelector('#mlbfixtures');
+     const teamContainer = document.createElement('div');
+     teamContainer.innerHTML = `
+     <div class="row">
+     <div class="col-md-6 offset-md-3">
+         <div class="fixture-card" onclick="window.open('${mlb_URL}', '_blank')">
+             <div class="row">
+                 <div class="col">
+                     <img class="team-logo" src="${Hlogo}" alt="${homeTeam} logo">
+                     <h3 class="team-name">${homeTeam}</h3>
+                 </div>
+                 <div class="col">
+                   <h1 id='time'>
+                  
+                      ${hometeamscore} : ${awayteamscore}
+                       
+                       </h1>
+                          <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> LIVE</span></td>
+                           
+                      </div>
+                 <div class="col">
+                     <img class="team-logo" src="${Alogo}" alt="${awayTeam} Logo">
+                     <h3 class="team-name">${awayTeam}</h3>
+                 </div>
+             </div>
+                     
+         </div>
+     </div>
+ </div>
+
+ `;
+ container.appendChild(teamContainer);
+}
+ matchesFound = true;
+  }
+console.log(events)
+   }
+ //   IF NO MATCHES TODAY SHOW THIS CODE 
+ if (!matchesFound) {document.getElementById("mlbfixtures").style.display = "none";}
+}
+ getmlb();
+ // -- END OF MLB API CODE ---//
+
