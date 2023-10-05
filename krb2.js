@@ -2314,9 +2314,7 @@ async function getNBA() {
                                     <h3 class="team-name">${awayTeam}</h3>
                                 </div>
                             </div>
-                                    <div class='col'>
-                                    ${season}
-                                    </div>
+                                  
                         </div>
                     </div>
                 </div>
