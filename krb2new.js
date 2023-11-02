@@ -2167,7 +2167,7 @@ getgoldfixture()
                     const Hlogo = event.competitions[0].competitors[0].team.logo;
                     const Alogo = event.competitions[0].competitors[1].team.logo;
                     const timeOfMatch = event.status.type.shortDetail;
-                    const season = event.season.slug;
+                    const season = event.week.number;
                     const eventDate = new Date(event.date);
                     const detail = event.status.type.detail;
                     const eventId = event.id;
