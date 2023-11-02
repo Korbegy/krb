@@ -1675,7 +1675,7 @@ async function getdelray() {
     // Render all scheduled games
     for (const sport of Sports) {
         
-        if (sport.statusText !== "Final" && (sport.statusText !== "Postponed")) {
+        if (sport.statusText !== "Ended" && (sport.statusText !== "Postponed")) {
         if (sport.statusText === "Scheduled") {
             const gameDate = new Date(sport.startTime);
             // Check if the game is scheduled for today
@@ -1726,7 +1726,7 @@ async function getdelray() {
         }
         
                 // if live  now
-                if (sport.statusText !== "Scheduled" && (sport.statusText !== "Final")) { 
+                if (sport.statusText !== "Scheduled" && (sport.statusText !== "Ended")) { 
                     const homeTeam = sport.homeCompetitor.name;
                     const awayTeam = sport.awayCompetitor.name;
                     const HLogo = sport.homeCompetitor.id;
