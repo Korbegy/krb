@@ -2203,7 +2203,7 @@ getgoldfixture()
                                 </div>
                             </div>
                                     <div class='col'>
-                                    ${season}
+                                    WEEK ${season}
                                     </div>
                         </div>
                     </div>
