@@ -147,7 +147,7 @@ getsaudileague();
 
 
 // الدوري بتاع ميسي 
-const apileaguescup = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=7242`;
+const apileaguescup = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=8`;
 async function getleaguescup() {
     let matchesFound = false; 
     const response = await fetch(apileaguescup);
@@ -159,7 +159,7 @@ async function getleaguescup() {
     const leagueName = data.competitions[0].name;
     const leagueSlug = data.competitions[0].nameForURL;
     
-    const container = document.querySelector('#leaguescup');
+    const container = document.querySelector('#fa');
     container.innerHTML = ''; // Clear the container before adding today's fixtures
 
     // Find the index of the first scheduled game
@@ -292,7 +292,7 @@ if (!matchesFound) {
 }
 
 getleaguescup();
-// دوري بتاع ميسي
+// fa
 
 
 
