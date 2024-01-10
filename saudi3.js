@@ -302,7 +302,7 @@ getleaguescup();
 
 
 // كاس السوبر الاوروبي
-const apisupercup = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=472`;
+const apisupercup = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=15`;
 async function getsupercup() {
     let matchesFound = false; 
     const response = await fetch(apisupercup);
