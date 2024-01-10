@@ -339,7 +339,7 @@ async function getsupercup() {
     // Render all scheduled games
     for (const sport of Sports) {
         
-        if (sport.statusText !== "Ended" && (sport.statusText !== "After Pen")) {
+        if (sport.statusText !== "Ended" && (sport.statusText !== "After Penalties") && (sport.statusText !== "After ET")) {
             
         if (sport.statusText === "Scheduled") {
             
