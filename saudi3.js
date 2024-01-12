@@ -1931,7 +1931,7 @@ getwc();
 
   
 //AFRICA live stream
-const apiaf = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=6196`;
+const apiaf = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=167`;
 async function getaf() {
     let matchesFound = false; 
     const response = await fetch(apiaf);
