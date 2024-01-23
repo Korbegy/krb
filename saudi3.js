@@ -2072,5 +2072,152 @@ async function getaf() {
 
 getaf();
 // africa live stream end 
+
+
+// inter miami matches 
+const messi = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitors=54729`;
+
+async function getmessi() {
+        let matchesFound = false; 
+        const response = await fetch(messi);
+        const data = await response.json();
+        const matches = data.games;
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const today = new Date();
+        const currentDayOfWeek = today.getDay();
+
+        const leagueName = data.competitions[0].name;
+         const leagueSlug = data.competitions[0].nameForURL;
+    
+        const container = document.querySelector('#messi');
+        container.innerHTML = ''; // Clear the container before adding today's fixtures
+                  // Find the index of the first scheduled game
+    let firstScheduledIndex = -1;
+    for (let i = 0; i < matches.length; i++) {
+        if (matches[i].statusText === "Scheduled") {
+            firstScheduledIndex = i;
+            break;
+        }
+    }
+    // هنا اضافة الاسم قبل البتاع الاول بس 
+    if (firstScheduledIndex !== -1) {
+        const champElement = document.createElement('p');
+        champElement.className = 'champ';
+        champElement.textContent = `${leagueName}`;
+        container.appendChild(champElement);
+    }
+    
+        for (const match of matches) {
+            
+            if (match.statusText !== "Ended" && (match.statusText !== "Postponed")) {
+            
+                if (match.statusText === "Scheduled") {
+                    
+                    const gameDate = new Date(match.startTime);
+                    // Check if the game is scheduled for today
+                    if (
+                        gameDate.getDate() === today.getDate() &&
+                        gameDate.getMonth() === today.getMonth() &&
+                        gameDate.getFullYear() === today.getFullYear()
+                    ) {
+                        matchesFound = true; 
+                        const estTimeStr = gameDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        
+                        const homeTeam = match.homeCompetitor.name;
+                        const awayTeam = match.awayCompetitor.name;
+                        const HLogo = match.homeCompetitor.id;
+                        const ALogo = match.awayCompetitor.id;
+                        const hometeamscore = match.homeCompetitor.score;
+                        const awayteamscore = match.awayCompetitor.score;
+                        const minu = match.gameTimeDisplay;
+                        const gameID = match.id;
+                        const link = `https://stream.krbgy.xyz/#${gameID}#${leagueSlug}`;
+        
+                        const teamContainer = document.createElement('div');
+                        teamContainer.innerHTML = `
+                            <div class="row">
+                                <div class="col-md-6 offset-md-3">
+                                    <div class="fixture-card" onclick="window.open('${link}', '_blank')">
+                                        <div class="row">
+                                            <div class="col">
+                                                <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${HLogo}" alt="${homeTeam} logo">
+                                                <h3 class="team-name">${homeTeam}</h3>
+                                            </div>
+                                            <div class="col">
+                                                <h1>VS</h1>
+                                                <span id="time">${estTimeStr}</span>
+                                            </div>
+                                            <div class="col">
+                                                <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${ALogo}" alt="${awayTeam} Logo">
+                                                <h3 class="team-name">${awayTeam}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+        
+                        container.appendChild(teamContainer);
+                    }
+                   
+                }
+                
+                        // if live  now
+                        if (match.statusText !== "Scheduled" && (match.statusText !== "Ended")) { 
+                            const homeTeam = match.homeCompetitor.name;
+                            const awayTeam = match.awayCompetitor.name;
+                            const HLogo = match.homeCompetitor.id;
+                            const ALogo = match.awayCompetitor.id;
+                            const hometeamscore = match.homeCompetitor.score;
+                            const awayteamscore = match.awayCompetitor.score;
+                            const minu = match.gameTimeDisplay;
+                            const gameID = match.id;
+                            const link = `https://stream.krbgy.xyz/#${gameID}#${leagueSlug}`;
+            
+                            const teamContainer = document.createElement('div');
+                            teamContainer.innerHTML = `
+                                <div class="row">
+                                    <div class="col-md-6 offset-md-3">
+                                        <div class="fixture-card" onclick="window.open('${link}', '_blank')">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${HLogo}" alt="${homeTeam} logo">
+                                                    <h3 class="team-name">${homeTeam}</h3>
+                                                </div>
+                                                <div class="col">
+                                                <h1 id='time'>
+                                     
+                                                ${hometeamscore} : ${awayteamscore}
+                                                 
+                                                 </h1>
+                                                
+           
+                                                <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> ${minu} LIVE</span></td>
+                                                </div>
+                                                <div class="col">
+                                                    <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${ALogo}" alt="${awayTeam} Logo">
+                                                    <h3 class="team-name">${awayTeam}</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+            
+                            container.appendChild(teamContainer);
+                            
+                        } // if live 
+                                         
+                    }
+        }
+        if (!matchesFound) {
+            // No matches found, hide the container
+            container.style.display = 'none';
+        }
+    
+}
+getmessi();
+
+// end of inter miami
     
 
