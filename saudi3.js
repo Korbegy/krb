@@ -2360,7 +2360,7 @@ $(document).ready(function () {
             const resultHtml = `
             <div class="row">
               <div class="col-md-6 offset-md-3">
-                  <div class="fixture-card" onclick="window.open('https://stream.krbgy.xyz/#4038345#fa-cup', '_blank')">
+                  <div class="fixture-card" onclick="window.open('https://boxing.krbgy.xyz/#${title}', '_blank')">
                       <div class="row">
                           <div class="col-3">
                               <img class="team-logo" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-boxing.png" alt="boxing logo">
