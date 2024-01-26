@@ -146,7 +146,7 @@ getsaudileague();
 
 
 
-// الدوري بتاع ميسي 
+// fa cup 
 const apileaguescup = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=8`;
 async function getleaguescup() {
     let matchesFound = false; 
@@ -184,7 +184,7 @@ async function getleaguescup() {
     // Render all scheduled games
     for (const sport of Sports) {
         
-        if (sport.statusText !== "Ended" && (sport.statusText !== "Postponed")) {
+        if (sport.statusText !== "Ended" && (sport.statusText !== "After ET")) {
             
         if (sport.statusText === "Scheduled") {
             
@@ -292,7 +292,7 @@ if (!matchesFound) {
 }
 
 getleaguescup();
-// fa
+// end fa cup 
 
 
 
