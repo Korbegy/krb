@@ -2344,8 +2344,8 @@ $(document).ready(function () {
         eventsDivs.each((index, element) => {
             const date = $(element).find('.mec-event-date').text().trim();
             const eventDate = new Date(date + ' ' + new Date().getFullYear());
-
             const fullTitle = $(element).find('.mec-event-title').text().trim();
+            const matchTime = fullTitle.split(' – ')[3] || "N/A"; // Assuming the time is the third part in the split
             const title = fullTitle.split(' – ')[0];
             const detailsDiv = $(element).find('.mec-event-detail');
             const placeElement = detailsDiv.find('.mec-event-loc-place');
@@ -2367,7 +2367,7 @@ $(document).ready(function () {
                               </div>
                           <div class="col">
                               <h3>${title}</h3>
-                              <span id="time">${date}</span>
+                              <span id="time">${date} - ${matchTime}</span>
                           </div>
                           <div class="col">
                             ${isToday ? 
@@ -2400,5 +2400,5 @@ function isTodayDate(date) {
         date.getFullYear() === today.getFullYear();
 }
 
-// end of boxing fixtures   
+// end of boxing fixtures      
 
