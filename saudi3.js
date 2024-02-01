@@ -1819,7 +1819,7 @@ async function getwc() {
     // Render all scheduled games
     for (const sport of Sports) {
         
-        if (sport.statusText !== "Ended" && (sport.statusText !== "After ET")) {
+        if (sport.statusText !== "Ended" && (sport.statusText !== "After Penalties") && (sport.statusText !== "After ET")) {
         if (sport.statusText === "Scheduled") {
             const gameDate = new Date(sport.startTime);
             // Check if the game is scheduled for today
@@ -1966,7 +1966,7 @@ async function getaf() {
     // Render all scheduled games
     for (const sport of Sports) {
         
-        if (sport.statusText !== "Ended" && (sport.statusText !== "After ET")) {
+      if (sport.statusText !== "Ended" && (sport.statusText !== "After Penalties") && (sport.statusText !== "After ET")) {
         if (sport.statusText === "Scheduled") {
             const gameDate = new Date(sport.startTime);
             // Check if the game is scheduled for today
