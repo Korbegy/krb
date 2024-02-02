@@ -2146,7 +2146,71 @@ async function getmessi() {
                     container.appendChild(teamContainer);
                 }
             }
-            // ... (rest of your code for live matches)
+            
+         // if live stream
+         if (match.statusText !== "Scheduled") {
+            const gameDate = new Date(match.startTime);
+            // Check if the game is scheduled for today
+            if (
+                gameDate.getDate() === today.getDate() &&
+                gameDate.getMonth() === today.getMonth() &&
+                gameDate.getFullYear() === today.getFullYear()
+            ) {
+                matchesFound = true;
+                const estTimeStr = gameDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                const leagueName = match.competitionDisplayName;
+                const homeTeam = match.homeCompetitor.name;
+                const awayTeam = match.awayCompetitor.name;
+                const HLogo = match.homeCompetitor.id;
+                const ALogo = match.awayCompetitor.id;
+                const hometeamscore = match.homeCompetitor.score;
+                const awayteamscore = match.awayCompetitor.score;
+                const minu = match.gameTimeDisplay;
+                const gameID = match.id;
+                const link = `https://stream.krbgy.xyz/#${gameID}#${leagueName}`;
+
+                // Display the league name for each scheduled match
+                const champElement = document.createElement('p');
+                champElement.className = 'champ';
+                champElement.textContent = `${leagueName}`;
+                container.appendChild(champElement);
+
+                // Display the match details
+                const teamContainer = document.createElement('div');
+                teamContainer.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <div class="fixture-card" onclick="window.open('${link}', '_blank')">
+                                <div class="row">
+                                    <div class="col">
+                                        <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${HLogo}" alt="${homeTeam} logo">
+                                        <h3 class="team-name">${homeTeam}</h3>
+                                    </div>
+                                    <div class="col">
+                                    <h1 id='time'>
+                         
+                                    ${hometeamscore} : ${awayteamscore}
+                                     
+                                     </h1>
+                                    
+
+                                    <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> ${minu} LIVE</span></td>
+                                    </div>
+                                    <div class="col">
+                                        <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${ALogo}" alt="${awayTeam} Logo">
+                                        <h3 class="team-name">${awayTeam}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(teamContainer);
+            }
+        } // end of live section
+     
         }
     }
 
@@ -2192,8 +2256,7 @@ async function getronaldo() {
                     const awayTeam = match.awayCompetitor.name;
                     const HLogo = match.homeCompetitor.id;
                     const ALogo = match.awayCompetitor.id;
-                    const hometeamscore = match.homeCompetitor.score;
-                    const awayteamscore = match.awayCompetitor.score;
+                  
                     const minu = match.gameTimeDisplay;
                     const gameID = match.id;
                     const link = `https://stream.krbgy.xyz/#${gameID}#${leagueName}`;
@@ -2232,7 +2295,71 @@ async function getronaldo() {
                     container.appendChild(teamContainer);
                 }
             }
-            // ... (rest of your code for live matches)
+            // if live stream
+            if (match.statusText !== "Scheduled") {
+                const gameDate = new Date(match.startTime);
+                // Check if the game is scheduled for today
+                if (
+                    gameDate.getDate() === today.getDate() &&
+                    gameDate.getMonth() === today.getMonth() &&
+                    gameDate.getFullYear() === today.getFullYear()
+                ) {
+                    matchesFound = true;
+                    const estTimeStr = gameDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                    const leagueName = match.competitionDisplayName;
+                    const homeTeam = match.homeCompetitor.name;
+                    const awayTeam = match.awayCompetitor.name;
+                    const HLogo = match.homeCompetitor.id;
+                    const ALogo = match.awayCompetitor.id;
+                    const hometeamscore = match.homeCompetitor.score;
+                    const awayteamscore = match.awayCompetitor.score;
+                    const minu = match.gameTimeDisplay;
+                    const gameID = match.id;
+                    const link = `https://stream.krbgy.xyz/#${gameID}#${leagueName}`;
+
+                    // Display the league name for each scheduled match
+                    const champElement = document.createElement('p');
+                    champElement.className = 'champ';
+                    champElement.textContent = `${leagueName}`;
+                    container.appendChild(champElement);
+
+                    // Display the match details
+                    const teamContainer = document.createElement('div');
+                    teamContainer.innerHTML = `
+                        <div class="row">
+                            <div class="col-md-6 offset-md-3">
+                                <div class="fixture-card" onclick="window.open('${link}', '_blank')">
+                                    <div class="row">
+                                        <div class="col">
+                                            <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${HLogo}" alt="${homeTeam} logo">
+                                            <h3 class="team-name">${homeTeam}</h3>
+                                        </div>
+                                        <div class="col">
+                                        <h1 id='time'>
+                             
+                                        ${hometeamscore} : ${awayteamscore}
+                                         
+                                         </h1>
+                                        
+   
+                                        <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> ${minu} LIVE</span></td>
+                                        </div>
+                                        <div class="col">
+                                            <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${ALogo}" alt="${awayTeam} Logo">
+                                            <h3 class="team-name">${awayTeam}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    container.appendChild(teamContainer);
+                }
+            } // end of live section
+        
+            
         }
     }
 
@@ -2318,7 +2445,71 @@ async function getNovak() {
                     container.appendChild(teamContainer);
                 }
             }
-            // ... (rest of your code for live matches)
+            
+        
+                 // if live stream
+            if (match.statusText !== "Scheduled") {
+                const gameDate = new Date(match.startTime);
+                // Check if the game is scheduled for today
+                if (
+                    gameDate.getDate() === today.getDate() &&
+                    gameDate.getMonth() === today.getMonth() &&
+                    gameDate.getFullYear() === today.getFullYear()
+                ) {
+                    matchesFound = true;
+                    const estTimeStr = gameDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                    const leagueName = match.competitionDisplayName;
+                    const homeTeam = match.homeCompetitor.name;
+                    const awayTeam = match.awayCompetitor.name;
+                    const HLogo = match.homeCompetitor.id;
+                    const ALogo = match.awayCompetitor.id;
+                    const hometeamscore = match.homeCompetitor.score;
+                    const awayteamscore = match.awayCompetitor.score;
+                    const minu = match.gameTimeDisplay;
+                    const gameID = match.id;
+                    const link = `https://stream.krbgy.xyz/#${gameID}#${leagueName}`;
+
+                    // Display the league name for each scheduled match
+                    const champElement = document.createElement('p');
+                    champElement.className = 'champ';
+                    champElement.textContent = `${leagueName}`;
+                    container.appendChild(champElement);
+
+                    // Display the match details
+                    const teamContainer = document.createElement('div');
+                    teamContainer.innerHTML = `
+                        <div class="row">
+                            <div class="col-md-6 offset-md-3">
+                                <div class="fixture-card" onclick="window.open('${link}', '_blank')">
+                                    <div class="row">
+                                        <div class="col">
+                                            <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${HLogo}" alt="${homeTeam} logo">
+                                            <h3 class="team-name">${homeTeam}</h3>
+                                        </div>
+                                        <div class="col">
+                                        <h1 id='time'>
+                             
+                                        ${hometeamscore} : ${awayteamscore}
+                                         
+                                         </h1>
+                                        
+   
+                                        <td id='timetd' width='1%'><span id='time' class='timee' style='color:red;font-weight: 800;'> ${minu} LIVE</span></td>
+                                        </div>
+                                        <div class="col">
+                                            <img class="team-logo" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Competitors:default1.png/v4/Competitors/${ALogo}" alt="${awayTeam} Logo">
+                                            <h3 class="team-name">${awayTeam}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    container.appendChild(teamContainer);
+                }
+            } // end of live section
         }
     }
 
@@ -2397,4 +2588,3 @@ function isTodayDate(date) {
 }
 
 // end of boxing fixtures      
-
