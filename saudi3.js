@@ -911,8 +911,8 @@ getncaaf();
 
 
 
-// FIBA WORLD CUP 
-const apinbaworld = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=471`;
+// NBA FIXTURES
+const apinbaworld = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=103`;
 async function getnbaworld() {
     let matchesFound = false; 
     const response = await fetch(apinbaworld);
@@ -971,7 +971,7 @@ async function getnbaworld() {
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
                 const gameID = sport.id;
-                const link = `https://stream.krbgy.xyz/#${gameID}#${leagueSlug}`;
+                const link = `https://nbalive.krbgy.xyz/#${gameID}#${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
@@ -1057,7 +1057,7 @@ if (!matchesFound) {
 }
 
 getnbaworld();
-// end of fiba
+// end of nba fixtures
 
 
 
