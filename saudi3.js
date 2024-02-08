@@ -2530,24 +2530,23 @@ const url = "https://boxingschedule.co/";
 // Ensure that jQuery is loaded before using it
 $(document).ready(function () {
     $.get(url, (html) => {
-        const eventsDivs = $(html).find('.col-md-6.col-sm-6');
+      
+        const eventsDivs = $(html).find('.mec-event-article'); // Update to parse the HTML
 
         eventsDivs.each((index, element) => {
-            const date = $(element).find('.mec-event-date').text().trim();
-            const eventDate = new Date(date + ' ' + new Date().getFullYear());
-            const fullTitle = $(element).find('.mec-event-title').text().trim();
-            const matchTime = fullTitle.split(' – ')[3] || "N/A"; // Assuming the time is the third part in the split
-            const title = fullTitle.split(' – ')[0];
+            const eventTitle = $(element).find('.mec-event-title a').text().trim();
+            const eventDate = eventTitle.split(' – ')[2]; // Extract the date part from the event title
+            const fullTitle = eventTitle.split(' – ')[0];
+            const matchTime = eventTitle.split(' – ')[3] || "N/A";
+            const title = fullTitle;
             const detailsDiv = $(element).find('.mec-event-detail');
             const placeElement = detailsDiv.find('.mec-event-loc-place');
             const place = placeElement.text().trim() || "N/A";
-
-            // Check if the event date is today
-            const isToday = isTodayDate(eventDate);
+            const isToday = isTodayDate(new Date(eventDate + ' ' + new Date().getFullYear()));
 
             console.log('Event Date:', eventDate);
             console.log('Is Today:', isToday);
-            
+
             const resultHtml = `
             <div class="row">
               <div class="col-md-6 offset-md-3">
@@ -2555,10 +2554,11 @@ $(document).ready(function () {
                       <div class="row">
                           <div class="col-3">
                               <img class="team-logo" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-boxing.png" alt="boxing logo">
-                              </div>
+                          </div>
                           <div class="col">
                               <h3>${title}</h3>
-                              <span id="time">${date} - ${matchTime}</span>
+                              <span id="time">${eventDate} - ${matchTime}</span>
+                            
                           </div>
                           <div class="col">
                             ${isToday ? 
@@ -2568,7 +2568,7 @@ $(document).ready(function () {
                                   </svg> Live
                               </button>` : 
                               ``
-                          }
+                            }
                           </div>
                       </div>
                   </div>
@@ -2586,5 +2586,6 @@ function isTodayDate(date) {
         date.getMonth() === today.getMonth() &&
         date.getFullYear() === today.getFullYear();
 }
+
 
 // end of boxing fixtures      
