@@ -2525,17 +2525,16 @@ getNovak();
 
 
 // boxing live stream
+// boxing live stream
 const url = "https://boxingschedule.co/";
 
-// Ensure that jQuery is loaded before using it
 $(document).ready(function () {
     $.get(url, (html) => {
-      
-        const eventsDivs = $(html).find('.mec-event-article'); // Update to parse the HTML
-
-        eventsDivs.each((index, element) => {
+        const eventDivs = $(html).find('.mec-event-article'); 
+        
+        eventDivs.each((index, element) => {
+            const eventDate = $(element).find('.mec-event-date').text().trim();
             const eventTitle = $(element).find('.mec-event-title a').text().trim();
-            const eventDate = eventTitle.split(' – ')[2]; // Extract the date part from the event title
             const fullTitle = eventTitle.split(' – ')[0];
             const matchTime = eventTitle.split(' – ')[3] || "N/A";
             const title = fullTitle;
@@ -2543,9 +2542,6 @@ $(document).ready(function () {
             const placeElement = detailsDiv.find('.mec-event-loc-place');
             const place = placeElement.text().trim() || "N/A";
             const isToday = isTodayDate(new Date(eventDate + ' ' + new Date().getFullYear()));
-
-            console.log('Event Date:', eventDate);
-            console.log('Is Today:', isToday);
 
             const resultHtml = `
             <div class="row">
@@ -2557,8 +2553,7 @@ $(document).ready(function () {
                           </div>
                           <div class="col">
                               <h3>${title}</h3>
-                              <span id="time">${eventDate} - ${matchTime}</span>
-                            
+                             
                           </div>
                           <div class="col">
                             ${isToday ? 
@@ -2567,7 +2562,7 @@ $(document).ready(function () {
                                       <path stroke-width="9" stroke="currentColor" d="M44.25 36.3612L17.25 51.9497C11.5833 55.2213 4.5 51.1318 4.50001 44.5885L4.50001 13.4115C4.50001 6.86824 11.5833 2.77868 17.25 6.05033L44.25 21.6388C49.9167 24.9104 49.9167 33.0896 44.25 36.3612Z"></path>
                                   </svg> Live
                               </button>` : 
-                              ``
+                              `${eventDate}`
                             }
                           </div>
                       </div>
