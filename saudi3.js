@@ -2525,53 +2525,48 @@ getNovak();
 
 
 // boxing live stream
-// boxing live stream
-const url = "https://boxingschedule.co/";
-
 $(document).ready(function () {
-    $.get(url, (html) => {
-        const eventDivs = $(html).find('.mec-event-article'); 
-        
-        eventDivs.each((index, element) => {
-            const eventDate = $(element).find('.mec-event-date').text().trim();
-            const eventTitle = $(element).find('.mec-event-title a').text().trim();
-            const fullTitle = eventTitle.split(' – ')[0];
-            const matchTime = eventTitle.split(' – ')[3] || "N/A";
-            const title = fullTitle;
-            const detailsDiv = $(element).find('.mec-event-detail');
-            const placeElement = detailsDiv.find('.mec-event-loc-place');
-            const place = placeElement.text().trim() || "N/A";
-            const isToday = isTodayDate(new Date(eventDate + ' ' + new Date().getFullYear()));
+    const url = "https://boxingschedule.co/";
 
-            const resultHtml = `
-            <div class="row">
-              <div class="col-md-6 offset-md-3">
-                  <div class="fixture-card" onclick="window.open('https://boxing.krbgy.xyz/#${title}', '_blank')">
-                      <div class="row">
-                          <div class="col-3">
-                              <img class="team-logo" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-boxing.png" alt="boxing logo">
-                          </div>
-                          <div class="col">
-                              <h3>${title}</h3>
-                             
-                          </div>
-                          <div class="col">
-                            ${isToday ? 
-                              `<button class="event-button" onclick="handleButtonClick('${title}')">
-                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 53 58" height="15" width="15">
-                                      <path stroke-width="9" stroke="currentColor" d="M44.25 36.3612L17.25 51.9497C11.5833 55.2213 4.5 51.1318 4.50001 44.5885L4.50001 13.4115C4.50001 6.86824 11.5833 2.77868 17.25 6.05033L44.25 21.6388C49.9167 24.9104 49.9167 33.0896 44.25 36.3612Z"></path>
-                                  </svg> Live
-                              </button>` : 
-                              `${eventDate}`
-                            }
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-            `;
-            $('#boxing').append(resultHtml);
-        });
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (html) {
+            // Extract main event info
+            const mainEventTags = $(html).find('h3').filter((index, tag) => $(tag).text().includes("Main Event:"));
+            mainEventTags.each((index, tag) => {
+                const mainEventTitle = $(tag).text().split('Main Event:')[1].trim();
+                const date = $(tag).prevAll('h3').filter((index, prevTag) => $(prevTag).text().includes(':')).first().text().split(':')[0].trim();
+                const isToday = isTodayDate(new Date(date + ' ' + new Date().getFullYear()));
+                const mainEventCardHtml = `
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <div class="fixture-card" onclick="window.open('https://boxing.krbgy.xyz/#${mainEventTitle}', '_blank')">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <img class="team-logo" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-boxing.png" alt="boxing logo">
+                                    </div>
+                                    <div class="col">
+                                        <h3>${mainEventTitle}</h3>
+                                    </div>
+                                    <div class="col">
+                                        ${isToday ? 
+                                          `<button class="event-button" onclick="handleButtonClick('${mainEventTitle}')">
+                                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 53 58" height="15" width="15">
+                                                  <path stroke-width="9" stroke="currentColor" d="M44.25 36.3612L17.25 51.9497C11.5833 55.2213 4.5 51.1318 4.50001 44.5885L4.50001 13.4115C4.50001 6.86824 11.5833 2.77868 17.25 6.05033L44.25 21.6388C49.9167 24.9104 49.9167 33.0896 44.25 36.3612Z"></path>
+                                              </svg> Live
+                                          </button>` : 
+                                          `${date}`
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                $('#boxing').append(mainEventCardHtml);
+            });
+        }
     });
 });
 
@@ -2581,6 +2576,5 @@ function isTodayDate(date) {
         date.getMonth() === today.getMonth() &&
         date.getFullYear() === today.getFullYear();
 }
-
 
 // end of boxing fixtures      
