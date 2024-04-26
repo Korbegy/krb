@@ -2525,6 +2525,7 @@ getNovak();
 
 
 // boxing live stream
+// boxing live stream
 $(document).ready(function () {
     const url = "https://boxingschedule.co/";
 
@@ -2535,54 +2536,32 @@ $(document).ready(function () {
             // Convert the HTML string to a jQuery object
             const $html = $(html);
 
-            // Find all h2 tags containing fight names
-            const fight_names = $html.find('h2');
+            let schedule = [];  // Array to store extracted fight data
 
-            // Find all h3 tags containing dates
-            const dates = $html.find('h3');
+            // Find all tables containing fight information
+            const tables = $html.find('table');
 
-            // Iterate through the fight names and dates
-            fight_names.each(function (index) {
-                const fight_name = $(this).text().trim();
-                const date_text = dates.eq(index).text().trim().split(':')[0];
+            tables.each(function () {
+                // Extract date and location from preceding paragraph
+                const dateLocationText = $(this).prev().text().trim();
+                const [date, location] = extractDateLocation(dateLocationText);
 
-                // Check if the event is happening today (for demonstration purposes)
-                const isToday = isTodayDate(new Date(date_text));
-
-                // Main event title (you need to define this variable)
-                const mainEventTitle = fight_name; // You need to define this variable
-
-                // Generate HTML for the main event card
-                const mainEventCardHtml = `
-                    <div class="row">
-                        <div class="col-md-6 offset-md-3">
-                            <div class="fixture-card" onclick="window.open('https://boxing.krbgy.xyz/#STREAM LIVE NOW', '_blank')">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <img class="team-logo" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-boxing.png" alt="boxing logo">
-                                    </div>
-                                    <div class="col">
-                                        <h3>${mainEventTitle}</h3>
-                                    </div>
-                                    <div class="col">
-                                        ${isToday ? 
-                                          `<button class="event-button" onclick="handleButtonClick('${mainEventTitle}')">
-                                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 53 58" height="15" width="15">
-                                                  <path stroke-width="9" stroke="currentColor" d="M44.25 36.3612L17.25 51.9497C11.5833 55.2213 4.5 51.1318 4.50001 44.5885L4.50001 13.4115C4.50001 6.86824 11.5833 2.77868 17.25 6.05033L44.25 21.6388C49.9167 24.9104 49.9167 33.0896 44.25 36.3612Z"></path>
-                                              </svg> Live
-                                          </button>` : 
-                                          `${date_text}`
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                // Append the main event card HTML to the #boxing div
-                $('#boxing').append(mainEventCardHtml);
+                // Extract fight data from table rows
+                const rows = $(this).find('tr').slice(1);  // Skip header row
+                rows.each(function () {
+                    const fighters = $(this).find('td').eq(0).text().trim();
+                    const divisionTitle = $(this).find('td').eq(1).text().trim();
+                    schedule.push({
+                        date: date,
+                        location: location,
+                        fighters: fighters,
+                        divisionTitle: divisionTitle
+                    });
+                });
             });
+
+            // Display the schedule
+            displaySchedule(schedule);
         },
         error: function (xhr, status, error) {
             console.error('Error fetching data:', error);
@@ -2590,11 +2569,57 @@ $(document).ready(function () {
     });
 });
 
-function isTodayDate(date) {
-    const today = new Date();
-    return date.getDate() === today.getDate() &&
-        date.getMonth() === today.getMonth() &&
-        date.getFullYear() === today.getFullYear();
+function extractDateLocation(text) {
+    // Example: "APRIL 27: FRESNO, CALIFORNIA (LIVE ON DAZN)"
+    const parts = text.split(':');
+    const date = parts[0].trim();
+    const location = parts[1].split('(')[0].trim();
+    return [date, location];
+}
+
+function displaySchedule(schedule) {
+    const $boxingSchedule = $('#boxing');
+
+    // Define isToday function
+    function isToday(date) {
+        const today = new Date();
+        return date.getDate() === today.getDate() &&
+            date.getMonth() === today.getMonth() &&
+            date.getFullYear() === today.getFullYear();
+    }
+
+    // Print out the date, location, and fighters individually
+    schedule.forEach(function (fight) {
+        // Parse the date string to a Date object
+        const date = new Date(fight.date);
+
+        const fightInfo = `
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="fixture-card" onclick="window.open('https://boxing.krbgy.xyz/#STREAM LIVE NOW', '_blank')">
+                        <div class="row">
+                            <div class="col-3">
+                                <img class="team-logo" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-boxing.png" alt="boxing logo">
+                            </div>
+                            <div class="col">
+                                <h3>${fight.fighters}</h3>
+                            </div>
+                            <div class="col">
+                                ${isToday(date) ? 
+                                  `<button class="event-button" onclick="handleButtonClick('${fight.fighters}')">
+                                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 53 58" height="15" width="15">
+                                          <path stroke-width="9" stroke="currentColor" d="M44.25 36.3612L17.25 51.9497C11.5833 55.2213 4.5 51.1318 4.50001 44.5885L4.50001 13.4115C4.50001 6.86824 11.5833 2.77868 17.25 6.05033L44.25 21.6388C49.9167 24.9104 49.9167 33.0896 44.25 36.3612Z"></path>
+                                      </svg> Live
+                                  </button>` : 
+                                  `${fight.date}`
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        $boxingSchedule.append(fightInfo);
+    });
 }
 
 // end of boxing fixtures      
