@@ -2525,101 +2525,116 @@ getNovak();
 
 
 // boxing live stream
-// boxing live stream
-$(document).ready(function () {
-    const url = "https://boxingschedule.co/";
+async function main() {
+    const response = await fetch("https://boxingschedule.co/");
+    const src = await response.text();
+    const soup = new DOMParser().parseFromString(src, 'text/html');
+    const boxingDiv = document.getElementById("boxing");
 
-    $.ajax({
-        url: url,
-        type: "GET",
-        success: function (html) {
-            // Convert the HTML string to a jQuery object
-            const $html = $(html);
+    // Keywords to exclude
+    const exclude_keywords = ["Contact", "News", "Videos", "Tickets", "Rankings", "Results", "Gyms", "Live", "Crossover", "Top", "Follow Us", "Like Us", "Youtube", "Follow on IG", "Submit Boxing Event", "Privacy Policy", "About Us"];
 
-            let schedule = [];  // Array to store extracted fight data
+    // Get today's date in the format "Month Day"
+    const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
 
-            // Find all tables containing fight information
-            const tables = $html.find('table');
+    // Find all <ul> elements containing fight information
+    const ul_elements = soup.querySelectorAll('ul');
 
-            tables.each(function () {
-                // Extract date and location from preceding paragraph
-                const dateLocationText = $(this).prev().text().trim();
-                const [date, location] = extractDateLocation(dateLocationText);
+    ul_elements.forEach(ul => {
+        // Find the parent element containing the date
+        const date_parent = ul.previousElementSibling;
 
-                // Extract fight data from table rows
-                const rows = $(this).find('tr').slice(1);  // Skip header row
-                rows.each(function () {
-                    const fighters = $(this).find('td').eq(0).text().trim();
-                    const divisionTitle = $(this).find('td').eq(1).text().trim();
-                    schedule.push({
-                        date: date,
-                        location: location,
-                        fighters: fighters,
-                        divisionTitle: divisionTitle
-                    });
-                });
-            });
+        if (date_parent) {
+            const date_strong = date_parent.querySelector('strong');
 
-            // Display the schedule
-            displaySchedule(schedule);
-        },
-        error: function (xhr, status, error) {
-            console.error('Error fetching data:', error);
-        }
-    });
-});
+            if (date_strong) {
+                let date = date_strong.textContent.trim();
+                // Extract only what's before the ":" character
+                date = date.split(":")[0].trim();
 
-function extractDateLocation(text) {
-    // Example: "APRIL 27: FRESNO, CALIFORNIA (LIVE ON DAZN)"
-    const parts = text.split(':');
-    const date = parts[0].trim();
-    const location = parts[1].split('(')[0].trim();
-    return [date, location];
-}
-
-function displaySchedule(schedule) {
-    const $boxingSchedule = $('#boxing');
-
-    // Define isToday function
-    function isToday(date) {
-        const today = new Date();
-        return date.getDate() === today.getDate() &&
-            date.getMonth() === today.getMonth() &&
-            date.getFullYear() === today.getFullYear();
-    }
-
-    // Print out the date, location, and fighters individually
-    schedule.forEach(function (fight) {
-        // Parse the date string to a Date object
-        const date = new Date(fight.date);
-
-        const fightInfo = `
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <div class="fixture-card" onclick="window.open('https://boxing.krbgy.xyz/#STREAM LIVE NOW', '_blank')">
-                        <div class="row">
-                            <div class="col-3">
-                                <img class="team-logo" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-boxing.png" alt="boxing logo">
-                            </div>
-                            <div class="col">
-                                <h3>${fight.fighters}</h3>
-                            </div>
-                            <div class="col">
-                                ${isToday(date) ? 
-                                  `<button class="event-button" onclick="handleButtonClick('${fight.fighters}')">
+                // Extract text from each <li> element within <ul>
+                ul.querySelectorAll('li').forEach(li => {
+                    let fight_info = li.textContent.trim();
+                    if (!exclude_keywords.some(keyword => fight_info.includes(keyword))) {
+                        // Extract only what's before the comma (",") character
+                        fight_info = fight_info.split(",")[0].trim();
+                        const fightElement = document.createElement("div");
+                        fightElement.innerHTML = `
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="fixture-card" onclick="window.open('https://boxing.krbgy.xyz/#${fight_info}', '_blank')">
+                <div class="row">
+                    <div class="col-3">
+                        <img class="team-logo" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-boxing.png" alt="boxing logo">
+                    </div>
+                    <div class="col">
+                        <h3>${fight_info}</h3>
+                    </div>
+                    <div class="col">
+                        ${date === today ? `<button class="event-button" onclick="handleButtonClick('${fight_info}')">
                                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 53 58" height="15" width="15">
                                           <path stroke-width="9" stroke="currentColor" d="M44.25 36.3612L17.25 51.9497C11.5833 55.2213 4.5 51.1318 4.50001 44.5885L4.50001 13.4115C4.50001 6.86824 11.5833 2.77868 17.25 6.05033L44.25 21.6388C49.9167 24.9104 49.9167 33.0896 44.25 36.3612Z"></path>
                                       </svg> Live
-                                  </button>` : 
-                                  `${fight.date}`
-                                }
-                            </div>
-                        </div>
+                                  </button>` : date}
                     </div>
                 </div>
-            </div>`;
-        $boxingSchedule.append(fightInfo);
+            </div>
+        </div>
+    </div>`;
+                        boxingDiv.appendChild(fightElement);
+                    }
+                });
+            }
+        }
+    });
+
+    // Find all <p> elements containing fight information
+    const p_elements = soup.querySelectorAll('p');
+
+    p_elements.forEach(p => {
+        const strong_tag = p.querySelector('strong');
+
+        if (strong_tag) {
+            let date = strong_tag.textContent.trim();
+            // Extract only what's before the ":" character
+            date = date.split(":")[0].trim();
+
+            // Extract fight details excluding the date
+            const fights = Array.from(p.querySelectorAll('br')).slice(1);
+
+            fights.forEach(fight => {
+                let fight_info = fight.nextSibling.textContent.trim();
+                if (!exclude_keywords.some(keyword => fight_info.includes(keyword))) {
+                    // Extract only what's before the comma (",") character
+                    fight_info = fight_info.split(",")[0].trim();
+                    const fightElement = document.createElement("div");
+                    fightElement.innerHTML = ` <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="fixture-card" onclick="window.open('https://boxing.krbgy.xyz/#STREAM LIVE NOW', '_blank')">
+                <div class="row">
+                    <div class="col-3">
+                        <img class="team-logo" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-boxing.png" alt="boxing logo">
+                    </div>
+                    <div class="col">
+                        <h3>${fight_info}</h3>
+                    </div>
+                    <div class="col">
+                        ${date === today ? `<button class="event-button" onclick="handleButtonClick('${fight_info}')">
+                                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 53 58" height="15" width="15">
+                                          <path stroke-width="9" stroke="currentColor" d="M44.25 36.3612L17.25 51.9497C11.5833 55.2213 4.5 51.1318 4.50001 44.5885L4.50001 13.4115C4.50001 6.86824 11.5833 2.77868 17.25 6.05033L44.25 21.6388C49.9167 24.9104 49.9167 33.0896 44.25 36.3612Z"></path>
+                                      </svg> Live
+                                  </button>` : date}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>`;
+                    boxingDiv.appendChild(fightElement);
+                }
+            });
+        }
     });
 }
 
-// end of boxing fixtures      
+main();
+// end of boxing stream  
