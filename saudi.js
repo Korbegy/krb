@@ -972,7 +972,7 @@ async function getnbaworld() {
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
                 const gameID = sport.id;
-                const link = `https://nbalive.krbgy.xyz/#${gameID}#${leagueSlug}`;
+                const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
