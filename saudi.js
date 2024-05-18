@@ -53,7 +53,7 @@ async function getsaudileague() {
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
                 const gameID = sport.id;
-                const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
@@ -94,7 +94,7 @@ async function getsaudileague() {
                     const awayteamscore = sport.awayCompetitor.score;
                     const minu = sport.gameTimeDisplay;
                     const gameID = sport.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
     
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
@@ -206,7 +206,7 @@ async function getleaguescup() {
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
                 const gameID = sport.id;
-                const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
@@ -247,7 +247,7 @@ async function getleaguescup() {
                     const awayteamscore = sport.awayCompetitor.score;
                     const minu = sport.gameTimeDisplay;
                     const gameID = sport.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
     
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
@@ -361,7 +361,7 @@ async function getsupercup() {
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
                 const gameID = sport.id;
-                const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
@@ -402,7 +402,7 @@ async function getsupercup() {
                     const awayteamscore = sport.awayCompetitor.score;
                     const minu = sport.gameTimeDisplay;
                     const gameID = sport.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
     
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
@@ -514,7 +514,7 @@ async function getchampionsleaguenow() {
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
                 const gameID = sport.id;
-                const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
@@ -555,7 +555,7 @@ async function getchampionsleaguenow() {
                     const awayteamscore = sport.awayCompetitor.score;
                     const minu = sport.gameTimeDisplay;
                     const gameID = sport.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
     
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
@@ -668,7 +668,7 @@ async function getasia() {
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
                 const gameID = sport.id;
-                const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
@@ -709,7 +709,7 @@ async function getasia() {
                     const awayteamscore = sport.awayCompetitor.score;
                     const minu = sport.gameTimeDisplay;
                     const gameID = sport.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
     
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
@@ -821,7 +821,7 @@ async function getncaaf() {
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
                 const gameID = sport.id;
-                const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
@@ -862,7 +862,7 @@ async function getncaaf() {
                     const awayteamscore = sport.awayCompetitor.score;
                     const minu = sport.gameTimeDisplay;
                     const gameID = sport.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
     
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
@@ -1012,7 +1012,7 @@ async function getnbaworld() {
                     const awayteamscore = sport.awayCompetitor.score;
                     const minu = sport.gameTimeDisplay;
                     const gameID = sport.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
     
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
@@ -1116,7 +1116,7 @@ async function getconmebol() {
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
                 const gameID = sport.id;
-                const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
@@ -1157,7 +1157,7 @@ async function getconmebol() {
                     const awayteamscore = sport.awayCompetitor.score;
                     const minu = sport.gameTimeDisplay;
                     const gameID = sport.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
     
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
@@ -1262,7 +1262,7 @@ async function getusopen() {
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
                 const gameID = sport.id;
-                const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
@@ -1303,7 +1303,7 @@ async function getusopen() {
                     const awayteamscore = sport.awayCompetitor.score;
                     const minu = sport.gameTimeDisplay;
                     const gameID = sport.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
     
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
@@ -1407,7 +1407,7 @@ async function getnfl() {
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
                 const gameID = sport.id;
-                const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
@@ -1448,7 +1448,7 @@ async function getnfl() {
                     const awayteamscore = sport.awayCompetitor.score;
                     const minu = sport.gameTimeDisplay;
                     const gameID = sport.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
     
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
@@ -1549,7 +1549,7 @@ async function getmlb() {
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
                 const gameID = sport.id;
-                const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
@@ -1590,7 +1590,7 @@ async function getmlb() {
                     const awayteamscore = sport.awayCompetitor.score;
                     const minu = sport.gameTimeDisplay;
                     const gameID = sport.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
     
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
@@ -1694,7 +1694,7 @@ async function getdelray() {
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
                 const gameID = sport.id;
-                const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
@@ -1735,7 +1735,7 @@ async function getdelray() {
                     const awayteamscore = sport.awayCompetitor.score;
                     const minu = sport.gameTimeDisplay;
                     const gameID = sport.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
     
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
@@ -1838,7 +1838,7 @@ async function getwc() {
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
                 const gameID = sport.id;
-                const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
@@ -1879,7 +1879,7 @@ async function getwc() {
                     const awayteamscore = sport.awayCompetitor.score;
                     const minu = sport.gameTimeDisplay;
                     const gameID = sport.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
     
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
@@ -1985,7 +1985,7 @@ async function getaf() {
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
                 const gameID = sport.id;
-                const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `
@@ -2026,7 +2026,7 @@ async function getaf() {
                     const awayteamscore = sport.awayCompetitor.score;
                     const minu = sport.gameTimeDisplay;
                     const gameID = sport.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueSlug}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueSlug}`;
     
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
@@ -2110,7 +2110,7 @@ async function getmessi() {
                     const awayteamscore = match.awayCompetitor.score;
                     const minu = match.gameTimeDisplay;
                     const gameID = match.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueName}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueName}`;
 
                     // Display the league name for each scheduled match
                     const champElement = document.createElement('p');
@@ -2168,7 +2168,7 @@ async function getmessi() {
                 const awayteamscore = match.awayCompetitor.score;
                 const minu = match.gameTimeDisplay;
                 const gameID = match.id;
-                const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueName}`;
+                const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueName}`;
 
                 // Display the league name for each scheduled match
                 const champElement = document.createElement('p');
@@ -2259,7 +2259,7 @@ async function getronaldo() {
                   
                     const minu = match.gameTimeDisplay;
                     const gameID = match.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueName}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueName}`;
 
                     // Display the league name for each scheduled match
                     const champElement = document.createElement('p');
@@ -2316,7 +2316,7 @@ async function getronaldo() {
                     const awayteamscore = match.awayCompetitor.score;
                     const minu = match.gameTimeDisplay;
                     const gameID = match.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueName}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueName}`;
 
                     // Display the league name for each scheduled match
                     const champElement = document.createElement('p');
@@ -2409,7 +2409,7 @@ async function getNovak() {
                     const awayteamscore = match.awayCompetitor.score;
                     const minu = match.gameTimeDisplay;
                     const gameID = match.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueName}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueName}`;
 
                     // Display the league name for each scheduled match
                     const champElement = document.createElement('p');
@@ -2468,7 +2468,7 @@ async function getNovak() {
                     const awayteamscore = match.awayCompetitor.score;
                     const minu = match.gameTimeDisplay;
                     const gameID = match.id;
-                    const link = `https://www.streameast.uno/p/live.html/#${gameID}#${leagueName}`;
+                    const link = `https://www.streameast.uno/p/live.html#${gameID}#${leagueName}`;
 
                     // Display the league name for each scheduled match
                     const champElement = document.createElement('p');
